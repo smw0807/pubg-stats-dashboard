@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import { Platform } from '../models/platform';
 import Alert from './Alert';
+import { useRouter } from 'next/navigation';
 
 export default function PlayerSearch() {
+  const router = useRouter();
+
   const [platform, setPlatform] = useState<Platform>('steam');
   const [nickname, setNickname] = useState('');
   const [alert, setAlert] = useState<{
@@ -37,10 +40,7 @@ export default function PlayerSearch() {
       showAlert('플레이어 닉네임을 입력해주세요.', 'warning');
       return;
     }
-
-    // TODO: API 호출 로직 구현
-    console.log('검색:', { platform, nickname });
-    showAlert('검색을 시작합니다...', 'info');
+    router.push(`/player/${platform}/${nickname}`);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
