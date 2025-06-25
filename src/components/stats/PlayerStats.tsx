@@ -16,6 +16,7 @@ export default function PlayerStats({
   stats,
   onNewSearch,
 }: PlayerStatsProps) {
+  console.log('stats', stats);
   const formatNumber = (num: number) => {
     if (num === 0) return '0';
     return num.toLocaleString();

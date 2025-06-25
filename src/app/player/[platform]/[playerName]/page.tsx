@@ -1,7 +1,10 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { usePlayerRankStats } from '~/components/stats/hooks/usePlayerStats';
+import {
+  usePlayerRankStats,
+  usePlayerStats,
+} from '~/components/stats/hooks/usePlayerStats';
 import PlayerStats from '~/components/stats/PlayerStats';
 
 export default function PlayerPage() {
@@ -11,16 +14,22 @@ export default function PlayerPage() {
   const playerName = params.playerName as string;
 
   const {
-    data: stats,
-    isLoading,
-    error,
+    data: rankStats,
+    isLoading: rankStatsLoading,
+    error: rankStatsError,
   } = usePlayerRankStats(platform, playerName);
+
+  const {
+    data: normalStats,
+    isLoading: normalStatsLoading,
+    error: normalStatsError,
+  } = usePlayerStats(platform, playerName);
 
   const handleNewSearch = () => {
     router.push('/');
   };
 
-  if (isLoading) {
+  if (rankStatsLoading && normalStatsLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
@@ -31,12 +40,14 @@ export default function PlayerPage() {
     );
   }
 
-  if (error) {
+  if (rankStatsError && normalStatsError) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-red-600 mb-4">오류 발생</h1>
-          <p className="text-gray-600 mb-4">{error.message}</p>
+          <p className="text-gray-600 mb-4">
+            {rankStatsError?.message || normalStatsError?.message}
+          </p>
           <button
             onClick={() => window.history.back()}
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
@@ -48,7 +59,7 @@ export default function PlayerPage() {
     );
   }
 
-  if (!stats) {
+  if (!rankStats && !normalStats) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
@@ -70,11 +81,27 @@ export default function PlayerPage() {
   }
 
   return (
-    <PlayerStats
-      playerName={playerName}
-      platform={platform}
-      stats={stats}
-      onNewSearch={handleNewSearch}
-    />
+    <div className="flex flex-coll gap-5">
+      <div>
+        {rankStats && (
+          <PlayerStats
+            playerName={playerName}
+            platform={platform}
+            stats={rankStats}
+            onNewSearch={handleNewSearch}
+          />
+        )}
+      </div>
+      <div>
+        {normalStats && (
+          <PlayerStats
+            playerName={playerName}
+            platform={platform}
+            stats={normalStats}
+            onNewSearch={handleNewSearch}
+          />
+        )}
+      </div>
+    </div>
   );
 }
