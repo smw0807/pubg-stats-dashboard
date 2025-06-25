@@ -1,8 +1,8 @@
 'use client';
 
 import { useParams, useRouter } from 'next/navigation';
-import { usePlayerStats } from '~/hooks/usePlayerStats';
-import PlayerStats from '~/components/PlayerStats';
+import { usePlayerRankStats } from '~/components/stats/hooks/usePlayerStats';
+import PlayerStats from '~/components/stats/PlayerStats';
 
 export default function PlayerPage() {
   const params = useParams();
@@ -14,7 +14,7 @@ export default function PlayerPage() {
     data: stats,
     isLoading,
     error,
-  } = usePlayerStats(platform, playerName);
+  } = usePlayerRankStats(platform, playerName);
 
   const handleNewSearch = () => {
     router.push('/');

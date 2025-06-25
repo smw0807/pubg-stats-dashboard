@@ -6,7 +6,7 @@ interface PlayerStatsParams {
   playerName: string;
 }
 
-const fetchPlayerStats = async ({
+const fetchPlayerRankStats = async ({
   platform,
   playerName,
 }: PlayerStatsParams): Promise<RankedGameModeStats> => {
@@ -23,10 +23,10 @@ const fetchPlayerStats = async ({
   return res.json();
 };
 
-export const usePlayerStats = (platform: string, playerName: string) => {
+export const usePlayerRankStats = (platform: string, playerName: string) => {
   return useQuery({
     queryKey: ['playerStats', platform, playerName],
-    queryFn: () => fetchPlayerStats({ platform, playerName }),
+    queryFn: () => fetchPlayerRankStats({ platform, playerName }),
     enabled: !!platform && !!playerName,
     staleTime: 1000 * 60 * 5, // 5분
     retry: 1,
