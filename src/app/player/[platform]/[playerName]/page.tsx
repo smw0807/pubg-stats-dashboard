@@ -92,7 +92,7 @@ export default function PlayerPage() {
           />
         )}
       </div>
-      <div>
+      {/* <div>
         {normalStats && (
           <PlayerStats
             playerName={playerName}
@@ -101,7 +101,7 @@ export default function PlayerPage() {
             onNewSearch={handleNewSearch}
           />
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

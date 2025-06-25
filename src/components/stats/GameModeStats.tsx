@@ -15,57 +15,64 @@ function GameModeStats({
   formatPercentage,
   formatTime,
 }: GameModeStatsProps) {
+  console.log('stats', stats);
   return (
     <div className="space-y-4">
       {/* 주요 통계 */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div
-            className={`text-lg font-bold ${getTierColor(
-              stats.currentTier.tier
-            )}`}
-          >
-            {stats.currentTier.tier} {stats.currentTier.subTier}
+      {stats.currentTier && (
+        <div className="grid grid-cols-2 gap-4">
+          <div className="text-center p-3 bg-gray-50 rounded-lg">
+            <div
+              className={`text-lg font-bold ${getTierColor(
+                stats.currentTier.tier
+              )}`}
+            >
+              {stats.currentTier.tier} {stats.currentTier.subTier}
+            </div>
+            <div className="text-sm text-gray-600">현재 티어</div>
+            <div className="text-xs text-gray-500">
+              {formatNumber(stats.currentRankPoint)} RP
+            </div>
           </div>
-          <div className="text-sm text-gray-600">현재 티어</div>
-          <div className="text-xs text-gray-500">
-            {formatNumber(stats.currentRankPoint)} RP
+          <div className="text-center p-3 bg-gray-50 rounded-lg">
+            <div
+              className={`text-lg font-bold ${getTierColor(
+                stats.bestTier.tier
+              )}`}
+            >
+              {stats.bestTier.tier} {stats.bestTier.subTier}
+            </div>
+            <div className="text-sm text-gray-600">최고 티어</div>
+            <div className="text-xs text-gray-500">
+              {formatNumber(stats.bestRankPoint)} RP
+            </div>
           </div>
         </div>
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div
-            className={`text-lg font-bold ${getTierColor(stats.bestTier.tier)}`}
-          >
-            {stats.bestTier.tier} {stats.bestTier.subTier}
-          </div>
-          <div className="text-sm text-gray-600">최고 티어</div>
-          <div className="text-xs text-gray-500">
-            {formatNumber(stats.bestRankPoint)} RP
-          </div>
-        </div>
-      </div>
+      )}
 
       {/* KDA & 승률 */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="text-center p-3 bg-blue-50 rounded-lg">
-          <div className="text-xl font-bold text-blue-600">
-            {stats.kda.toFixed(2)}
+      {stats.kda && (
+        <div className="grid grid-cols-2 gap-4">
+          <div className="text-center p-3 bg-blue-50 rounded-lg">
+            <div className="text-xl font-bold text-blue-600">
+              {stats.kda.toFixed(2)}
+            </div>
+            <div className="text-sm text-gray-600">KDA</div>
+            <div className="text-xs text-gray-500">
+              {stats.kills}K/{stats.deaths}D/{stats.assists}A
+            </div>
           </div>
-          <div className="text-sm text-gray-600">KDA</div>
-          <div className="text-xs text-gray-500">
-            {stats.kills}K/{stats.deaths}D/{stats.assists}A
+          <div className="text-center p-3 bg-green-50 rounded-lg">
+            <div className="text-xl font-bold text-green-600">
+              {formatPercentage(stats.winRatio)}
+            </div>
+            <div className="text-sm text-gray-600">승률</div>
+            <div className="text-xs text-gray-500">
+              {stats.wins}승/{stats.roundsPlayed}게임
+            </div>
           </div>
         </div>
-        <div className="text-center p-3 bg-green-50 rounded-lg">
-          <div className="text-xl font-bold text-green-600">
-            {formatPercentage(stats.winRatio)}
-          </div>
-          <div className="text-sm text-gray-600">승률</div>
-          <div className="text-xs text-gray-500">
-            {stats.wins}승/{stats.roundsPlayed}게임
-          </div>
-        </div>
-      </div>
+      )}
 
       {/* 게임 통계 */}
       <div className="space-y-2 text-sm">
