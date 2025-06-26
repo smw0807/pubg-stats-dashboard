@@ -63,8 +63,10 @@ export default function RecentMatchStats({
         return '미라마';
       case 'Savage_Main':
         return '사녹';
-      case 'DihorOtok_Main':
-        return '비켄디';
+      case 'Tiger_Main':
+        return '태이고';
+      case 'Neon_Main':
+        return '론도';
       default:
         return mapName;
     }
