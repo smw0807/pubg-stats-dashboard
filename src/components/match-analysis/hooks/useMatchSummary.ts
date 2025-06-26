@@ -7,7 +7,9 @@ const fetchMatchSummary = async ({
   platform: string;
   matchId: string;
 }) => {
-  const res = await fetch(`/api/matches/${platform}/${matchId}/summary`);
+  const res = await fetch(
+    `/api/matches/summary?platform=${platform}&matchId=${matchId}`
+  );
 
   if (!res.ok) {
     throw new Error('매치 요약 정보를 불러올 수 없습니다.');

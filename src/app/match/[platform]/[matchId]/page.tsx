@@ -1,8 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import AnalysisCard from '~/components/match-analysis/AnalysisCard';
 import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import AnalysisCard from '~/components/match-analysis/AnalysisCard';
+import MatchSummaryCard from '~/components/match-analysis/MatchSummaryCard';
+
+import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
 
 const CARD_LIST = [
   {
@@ -63,10 +66,65 @@ const CARD_LIST = [
 
 export default function MatchAnalysisPage() {
   const router = useRouter();
+  const params = useParams();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const platform = params.platform as string;
+  const matchId = params.matchId as string;
+
+  const {
+    data: summaryData,
+    isLoading: summaryLoading,
+    error: summaryError,
+  } = useMatchSummary(platform ?? '', matchId ?? '');
 
   const handleBack = () => {
     router.back();
+  };
+
+  const renderSelectedCardContent = () => {
+    if (!selectedCard) return null;
+
+    switch (selectedCard) {
+      case 'summary':
+        if (summaryLoading) {
+          return (
+            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">매치 요약 정보를 불러오는 중...</p>
+            </div>
+          );
+        }
+
+        if (summaryError) {
+          return (
+            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+              <div className="text-red-600 text-2xl mb-4">⚠️</div>
+              <p className="text-red-600 mb-2">
+                매치 요약 정보를 불러올 수 없습니다.
+              </p>
+              <p className="text-gray-600 text-sm">{summaryError.message}</p>
+            </div>
+          );
+        }
+
+        if (summaryData) {
+          return <MatchSummaryCard summary={summaryData} />;
+        }
+
+        return (
+          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+            <p className="text-gray-600">매치 요약 정보가 없습니다.</p>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="bg-white rounded-lg shadow-lg p-8 text-center text-xl text-blue-700 font-semibold">
+            &quot;{CARD_LIST.find((c) => c.key === selectedCard)?.title}&quot;
+            결과 영역입니다.
+          </div>
+        );
+    }
   };
 
   return (
@@ -94,7 +152,8 @@ export default function MatchAnalysisPage() {
               icon={card.icon}
               description={card.description}
               onClick={() => setSelectedCard(card.key)}
-              isLoading={false}
+              isLoading={card.key === 'summary' && summaryLoading}
+              hasData={card.key === selectedCard}
             />
           ))}
         </div>
@@ -102,9 +161,8 @@ export default function MatchAnalysisPage() {
         {/* 결과 영역 */}
         <div className="mt-10 min-h-[200px]">
           {selectedCard ? (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center text-xl text-blue-700 font-semibold">
-              &quot;{CARD_LIST.find((c) => c.key === selectedCard)?.title}&quot;
-              결과 영역입니다.
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              {renderSelectedCardContent()}
             </div>
           ) : (
             <div className="text-center text-gray-400 text-lg">
