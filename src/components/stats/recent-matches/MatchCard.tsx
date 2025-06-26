@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import type { RecentMatch } from '~/models/recentMatches';
 import MatchHeader from './MatchHeader';
 import PerformanceStats from './PerformanceStats';
@@ -7,16 +8,14 @@ import TeamStats from './TeamStats';
 interface MatchCardProps {
   match: RecentMatch;
   index: number;
+  platform: string;
 }
 
-export default function MatchCard({ match, index }: MatchCardProps) {
+export default function MatchCard({ match, index, platform }: MatchCardProps) {
+  const router = useRouter();
+
   const handleAnalyze = () => {
-    // 분석 기능 구현 (예: 모달 열기, 새 페이지로 이동 등)
-    console.log('매치 분석:', match.matchId);
-    // TODO: 실제 분석 기능 구현
-    alert(
-      `${match.gameMode} - ${match.mapName} 매치 분석 기능이 준비 중입니다.`
-    );
+    router.push(`/match/${platform}/${match.matchId}`);
   };
 
   return (

@@ -42,6 +42,7 @@ export default function RecentMatchStats({
             key={`${match.matchId}-${index}`}
             match={match}
             index={index}
+            platform={platform}
           />
         ))}
       </div>
