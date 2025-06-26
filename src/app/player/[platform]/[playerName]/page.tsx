@@ -82,7 +82,7 @@ export default function PlayerPage() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div>
         {rankStats && (
           <PlayerStats

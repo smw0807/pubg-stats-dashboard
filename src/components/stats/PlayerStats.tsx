@@ -45,7 +45,7 @@ export default function PlayerStats({
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="p-4">
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
         <div className="text-center mb-8">
