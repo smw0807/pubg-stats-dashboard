@@ -5,7 +5,6 @@ interface GameModeStatsProps {
   getTierColor: (tier: string) => string;
   formatNumber: (num: number) => string;
   formatPercentage: (num: number) => string;
-  formatTime: (seconds: number) => string;
 }
 
 function GameModeStats({
@@ -13,7 +12,6 @@ function GameModeStats({
   getTierColor,
   formatNumber,
   formatPercentage,
-  formatTime,
 }: GameModeStatsProps) {
   console.log('stats', stats);
   return (
@@ -101,27 +99,9 @@ function GameModeStats({
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-600">헤드샷 킬</span>
-          <span className="font-semibold text-gray-900">
-            {formatNumber(stats.headshotKills)}
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-gray-600">헤드샷 비율</span>
-          <span className="font-semibold text-gray-900">
-            {formatPercentage(stats.headshotKillRatio)}
-          </span>
-        </div>
-        <div className="flex justify-between">
           <span className="text-gray-600">데미지</span>
           <span className="font-semibold text-gray-900">
             {formatNumber(stats.damageDealt)}
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-gray-600">평균 생존 시간</span>
-          <span className="font-semibold text-gray-900">
-            {formatTime(stats.avgSurvivalTime)}
           </span>
         </div>
       </div>

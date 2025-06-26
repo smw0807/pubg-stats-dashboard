@@ -25,12 +25,6 @@ export default function PlayerStats({
     return (num * 100).toFixed(1) + '%';
   };
 
-  const formatTime = (seconds: number) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    return `${hours}h ${minutes}m`;
-  };
-
   const getTierColor = (tier: string) => {
     switch (tier.toLowerCase()) {
       case 'bronze':
@@ -46,12 +40,12 @@ export default function PlayerStats({
       case 'master':
         return 'text-pink-600';
       default:
-        return 'text-blue-600';
+        return 'text-red-600';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
         <div className="text-center mb-8">
@@ -82,7 +76,6 @@ export default function PlayerStats({
                   getTierColor={getTierColor}
                   formatNumber={formatNumber}
                   formatPercentage={formatPercentage}
-                  formatTime={formatTime}
                 />
               )}
             </div>
@@ -96,7 +89,6 @@ export default function PlayerStats({
                   getTierColor={getTierColor}
                   formatNumber={formatNumber}
                   formatPercentage={formatPercentage}
-                  formatTime={formatTime}
                 />
               </div>
             )}
@@ -110,7 +102,6 @@ export default function PlayerStats({
                   getTierColor={getTierColor}
                   formatNumber={formatNumber}
                   formatPercentage={formatPercentage}
-                  formatTime={formatTime}
                 />
               </div>
             )}

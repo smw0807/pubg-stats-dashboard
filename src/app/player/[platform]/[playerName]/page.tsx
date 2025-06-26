@@ -6,6 +6,7 @@ import {
   usePlayerStats,
 } from '~/components/stats/hooks/usePlayerStats';
 import PlayerStats from '~/components/stats/PlayerStats';
+import RecentMatchStats from '~/components/stats/RecentMatchStats';
 
 export default function PlayerPage() {
   const params = useParams();
@@ -81,7 +82,7 @@ export default function PlayerPage() {
   }
 
   return (
-    <div className="flex flex-coll gap-5">
+    <div>
       <div>
         {rankStats && (
           <PlayerStats
@@ -92,6 +93,12 @@ export default function PlayerPage() {
           />
         )}
       </div>
+
+      {/* 최근 매치 통계 */}
+      <div className="mx-auto px-4 pb-8">
+        <RecentMatchStats platform={platform} playerName={playerName} />
+      </div>
+
       {/* <div>
         {normalStats && (
           <PlayerStats

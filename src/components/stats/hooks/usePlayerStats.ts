@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import type { RankedGameModeStats } from '~/models/playerStats';
-
-interface PlayerStatsParams {
-  platform: string;
-  playerName: string;
-}
+import { SearchParams } from '~/models';
 
 const fetchPlayerRankStats = async ({
   platform,
   playerName,
-}: PlayerStatsParams): Promise<RankedGameModeStats> => {
+}: SearchParams): Promise<RankedGameModeStats> => {
   const res = await fetch(
     `/api/stats/rank?platform=${platform}&playerName=${encodeURIComponent(
       playerName
@@ -26,7 +22,7 @@ const fetchPlayerRankStats = async ({
 const fetchPlayerStats = async ({
   platform,
   playerName,
-}: PlayerStatsParams): Promise<RankedGameModeStats> => {
+}: SearchParams): Promise<RankedGameModeStats> => {
   const res = await fetch(
     `/api/stats/normal?platform=${platform}&playerName=${encodeURIComponent(
       playerName
