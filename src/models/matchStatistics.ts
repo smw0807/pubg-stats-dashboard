@@ -21,10 +21,10 @@ export interface MatchExtremes {
 }
 
 export interface MatchStatistics {
-  matchId?: string;
-  gameMode?: string;
-  mapName?: string;
-  duration?: number;
+  matchId: string;
+  gameMode: string;
+  mapName: string;
+  duration: number;
   playerCount: number;
   teamCount: number;
   summary: MatchSummary;
