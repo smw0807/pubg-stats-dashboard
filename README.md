@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PUBG Stats Dashboard
 
-## Getting Started
+PUBG (PlayerUnknown's Battlegrounds) 경기 통계를 시각화하는 대시보드 애플리케이션입니다.
 
-First, run the development server:
+## 🎯 프로젝트 개요
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+이 프로젝트는 PUBG 매치 데이터를 분석하고 다양한 통계 정보를 직관적으로 시각화하는 웹 애플리케이션입니다. 플레이어 검색, 매치 분석, 팀 성과 분석 등 다양한 기능을 제공합니다.
+
+## ✨ 주요 기능
+
+### 🔍 플레이어 검색
+
+- 플레이어 이름으로 검색
+- 최근 매치 기록 조회
+- 플레이어 통계 요약
+
+### 📊 매치 분석
+
+- **매치 요약 정보**: 게임 모드, 맵, 플레이 시간, 참가자 수
+- **팀 순위**: 팀별 순위와 기본 통계
+- **플레이어 통계**: 모든 플레이어의 상세 통계
+- **킬 리더보드**: 킬 상위 플레이어
+- **데미지 리더보드**: 데미지 상위 플레이어
+- **생존 시간 리더보드**: 생존 시간 상위 플레이어
+- **팀 분석**: 팀별 상세 분석
+- **플레이어 성과 분석**: 플레이어별 성과 분석
+- **매치 통계**: 매치 전체 통계 요약
+
+### 📈 데이터 시각화
+
+- 직관적인 카드 기반 UI
+- 색상 코딩을 통한 데이터 구분
+- 반응형 디자인
+- 실시간 로딩 상태 표시
+
+## 🛠 기술 스택
+
+- **Frontend**: Next.js 14, React 18, TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: React Query (TanStack Query)
+- **Build Tool**: Vite
+- **Package Manager**: Yarn
+
+## 📁 프로젝트 구조
+
+```
+pubg-stats-dashboard/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── layout.tsx         # 루트 레이아웃
+│   │   ├── page.tsx           # 메인 페이지
+│   │   ├── player/            # 플레이어 관련 페이지
+│   │   └── match/             # 매치 분석 페이지
+│   ├── components/            # React 컴포넌트
+│   │   ├── PlayerSearch.tsx   # 플레이어 검색
+│   │   ├── stats/             # 통계 관련 컴포넌트
+│   │   └── match-analysis/    # 매치 분석 컴포넌트
+│   ├── hooks/                 # 커스텀 훅
+│   ├── models/                # TypeScript 타입 정의
+│   ├── store/                 # 상태 관리
+│   └── utils/                 # 유틸리티 함수
+├── public/                    # 정적 파일
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 시작하기
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 필수 요구사항
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js 18.0.0 이상
+- Yarn 패키지 매니저
 
-## Learn More
+### 설치 및 실행
 
-To learn more about Next.js, take a look at the following resources:
+1. **저장소 클론**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   git clone https://github.com/your-username/pubg-stats-dashboard.git
+   cd pubg-stats-dashboard
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **의존성 설치**
 
-## Deploy on Vercel
+   ```bash
+   yarn install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **개발 서버 실행**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   yarn dev
+   ```
+
+4. **브라우저에서 확인**
+   ```
+   http://localhost:3000
+   ```
+
+### 빌드 및 배포
+
+```bash
+# 프로덕션 빌드
+yarn build
+
+# 프로덕션 서버 실행
+yarn start
+```
+
+**Note**: 이 프로젝트는 PUBG API를 사용하여 실제 게임 데이터를 표시합니다. API 키 설정이 필요합니다.
