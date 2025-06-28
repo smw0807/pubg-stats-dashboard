@@ -4,14 +4,16 @@ import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import AnalysisCard from '~/components/match-analysis/AnalysisCard';
 import MatchSummaryCard from '~/components/match-analysis/MatchSummaryCard';
-
-import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
 import TeamRankCard from '~/components/match-analysis/TeamRankCard';
-import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
-import { usePlayerStats } from '~/components/match-analysis/hooks/usePlayerStats';
 import PlayerStatsCard from '~/components/match-analysis/PlayerStatsCard';
 import KillLeaderboardCard from '~/components/match-analysis/KillLeaderboardCard';
+import DamageLeaderboardCard from '~/components/match-analysis/DamageLeaderboardCard';
+
+import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
+import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
+import { usePlayerStats } from '~/components/match-analysis/hooks/usePlayerStats';
 import { useKills } from '~/components/match-analysis/hooks/useKills';
+import { useDamage } from '~/components/match-analysis/hooks/useDamage';
 
 const CARD_LIST = [
   {
@@ -101,6 +103,12 @@ export default function MatchAnalysisPage() {
     error: killLeaderboardError,
   } = useKills(platform ?? '', matchId ?? '');
 
+  const {
+    data: damageLeaderboardData,
+    isLoading: damageLeaderboardLoading,
+    error: damageLeaderboardError,
+  } = useDamage(platform ?? '', matchId ?? '');
+
   const handleBack = () => {
     router.back();
   };
@@ -177,6 +185,14 @@ export default function MatchAnalysisPage() {
           />
         );
 
+      case 'damage':
+        return (
+          <DamageLeaderboardCard
+            damageLeaderboard={damageLeaderboardData ?? []}
+            isLoading={damageLeaderboardLoading}
+            error={damageLeaderboardError?.message}
+          />
+        );
       default:
         return (
           <div className="bg-white rounded-lg shadow-lg p-8 text-center text-xl text-blue-700 font-semibold">
