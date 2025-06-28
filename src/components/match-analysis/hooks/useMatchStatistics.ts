@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { KillLeaderboardData } from '~/models/killLeaderboard';
+import { MatchStatistics } from '~/models/matchStatistics';
 
 const fetchMatchStatistics = async (
   platform: string,
   matchId: string
-): Promise<KillLeaderboardData> => {
+): Promise<MatchStatistics> => {
   const res = await fetch(
     `/api/matches/statistics?platform=${platform}&matchId=${encodeURIComponent(
       matchId
@@ -12,7 +12,7 @@ const fetchMatchStatistics = async (
   );
 
   if (!res.ok) {
-    throw new Error('최다 킬 플레이어 정보를 찾을 수 없습니다.');
+    throw new Error('매치 통계 정보를 찾을 수 없습니다.');
   }
 
   return res.json();

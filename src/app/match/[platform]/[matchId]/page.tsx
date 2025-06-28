@@ -11,6 +11,7 @@ import DamageLeaderboardCard from '~/components/match-analysis/DamageLeaderboard
 import SurvivalLeaderboardCard from '~/components/match-analysis/SurvivalLeaderboardCard';
 import TeamAnalysisCard from '~/components/match-analysis/TeamAnalysisCard';
 import MatchStatisticsCard from '~/components/match-analysis/MatchStatisticsCard';
+import PlayerPerformanceCard from '~/components/match-analysis/PlayerPerformanceCard';
 
 import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
 import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
@@ -20,6 +21,7 @@ import { useDamage } from '~/components/match-analysis/hooks/useDamage';
 import { useSurvival } from '~/components/match-analysis/hooks/useSurvival';
 import { useTeamAnalysis } from '~/components/match-analysis/hooks/useTeamAnalysis';
 import { useMatchStatistics } from '~/components/match-analysis/hooks/useMatchStatistics';
+import { usePlayerPerformance } from '~/components/match-analysis/hooks/usePlayerPerformance';
 
 const CARD_LIST = [
   {
@@ -133,6 +135,12 @@ export default function MatchAnalysisPage() {
     error: matchStatisticsError,
   } = useMatchStatistics(platform ?? '', matchId ?? '');
 
+  const {
+    data: playerPerformanceData,
+    isLoading: playerPerformanceLoading,
+    error: playerPerformanceError,
+  } = usePlayerPerformance(platform ?? '', matchId ?? '');
+
   const handleBack = () => {
     router.back();
   };
@@ -239,9 +247,18 @@ export default function MatchAnalysisPage() {
       case 'statistics':
         return (
           <MatchStatisticsCard
-            matchStatistics={matchStatisticsData ?? []}
+            matchStatistics={matchStatisticsData!}
             isLoading={matchStatisticsLoading}
             error={matchStatisticsError?.message}
+          />
+        );
+
+      case 'playerPerformance':
+        return (
+          <PlayerPerformanceCard
+            playerPerformance={playerPerformanceData ?? []}
+            isLoading={playerPerformanceLoading}
+            error={playerPerformanceError?.message}
           />
         );
 

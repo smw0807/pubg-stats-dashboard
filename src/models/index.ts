@@ -19,3 +19,12 @@ export type {
   MatchAverages,
   MatchExtremes,
 } from './matchStatistics';
+
+// Player Performance Analysis
+export type {
+  PlayerPerformanceAnalysis,
+  PlayerPerformance,
+  PlayerEfficiency,
+  PlayerMovement,
+  PlayerItems,
+} from './playerPerformance';
