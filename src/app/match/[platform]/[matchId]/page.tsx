@@ -150,60 +150,28 @@ export default function MatchAnalysisPage() {
 
     switch (selectedCard) {
       case 'summary':
-        if (summaryLoading) {
-          return (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">매치 요약 정보를 불러오는 중...</p>
-            </div>
-          );
-        }
-
-        if (summaryData) {
-          return (
-            <MatchSummaryCard
-              summary={summaryData}
-              error={summaryError?.message}
-            />
-          );
-        }
-
         return (
-          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-            <p className="text-gray-600">매치 요약 정보가 없습니다.</p>
-          </div>
+          <MatchSummaryCard
+            summary={summaryData}
+            isLoading={summaryLoading}
+            error={summaryError?.message}
+          />
         );
 
       case 'team':
-        if (teamRankLoading) {
-          return (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">팀 순위 정보를 불러오는 중...</p>
-            </div>
-          );
-        }
         return (
           <TeamRankCard
             teamRanks={teamRankData ?? []}
+            isLoading={teamRankLoading}
             error={teamRankError?.message}
           />
         );
 
       case 'player':
-        if (playerStatsLoading) {
-          return (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">
-                플레이어 통계 정보를 불러오는 중...
-              </p>
-            </div>
-          );
-        }
         return (
           <PlayerStatsCard
             playerStats={playerStatsData ?? []}
+            isLoading={playerStatsLoading}
             error={playerStatsError?.message}
           />
         );
