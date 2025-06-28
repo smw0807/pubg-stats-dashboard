@@ -1,4 +1,5 @@
 import React from 'react';
+import { getGameModeDisplayName, getMapDisplayName } from '~/utils/matchUtils';
 
 interface MatchSummaryCardProps {
   summary: {
@@ -84,7 +85,7 @@ export default function MatchSummaryCard({ summary }: MatchSummaryCardProps) {
               <div>
                 <div className="text-sm text-gray-500">게임 모드</div>
                 <div className="font-semibold text-gray-800">
-                  {summary.gameMode}
+                  {getGameModeDisplayName(summary.gameMode)}
                 </div>
               </div>
             </div>
@@ -93,7 +94,7 @@ export default function MatchSummaryCard({ summary }: MatchSummaryCardProps) {
               <div>
                 <div className="text-sm text-gray-500">맵</div>
                 <div className="font-semibold text-gray-800">
-                  {summary.mapName}
+                  {getMapDisplayName(summary.mapName)}
                 </div>
               </div>
             </div>
