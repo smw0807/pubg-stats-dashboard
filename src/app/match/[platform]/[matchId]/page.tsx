@@ -9,6 +9,7 @@ import PlayerStatsCard from '~/components/match-analysis/PlayerStatsCard';
 import KillLeaderboardCard from '~/components/match-analysis/KillLeaderboardCard';
 import DamageLeaderboardCard from '~/components/match-analysis/DamageLeaderboardCard';
 import SurvivalLeaderboardCard from '~/components/match-analysis/SurvivalLeaderboardCard';
+import TeamAnalysisCard from '~/components/match-analysis/TeamAnalysisCard';
 
 import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
 import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
@@ -16,6 +17,7 @@ import { usePlayerStats } from '~/components/match-analysis/hooks/usePlayerStats
 import { useKills } from '~/components/match-analysis/hooks/useKills';
 import { useDamage } from '~/components/match-analysis/hooks/useDamage';
 import { useSurvival } from '~/components/match-analysis/hooks/useSurvival';
+import { useTeamAnalysis } from '~/components/match-analysis/hooks/useTeamAnalysis';
 
 const CARD_LIST = [
   {
@@ -117,6 +119,12 @@ export default function MatchAnalysisPage() {
     error: survivalLeaderboardError,
   } = useSurvival(platform ?? '', matchId ?? '');
 
+  const {
+    data: teamAnalysisData,
+    isLoading: teamAnalysisLoading,
+    error: teamAnalysisError,
+  } = useTeamAnalysis(platform ?? '', matchId ?? '');
+
   const handleBack = () => {
     router.back();
   };
@@ -208,6 +216,15 @@ export default function MatchAnalysisPage() {
             survivalLeaderboard={survivalLeaderboardData ?? []}
             isLoading={survivalLeaderboardLoading}
             error={survivalLeaderboardError?.message}
+          />
+        );
+
+      case 'teamAnalysis':
+        return (
+          <TeamAnalysisCard
+            teamAnalysis={teamAnalysisData ?? []}
+            isLoading={teamAnalysisLoading}
+            error={teamAnalysisError?.message}
           />
         );
 
