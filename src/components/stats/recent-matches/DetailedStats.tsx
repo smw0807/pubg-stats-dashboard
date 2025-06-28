@@ -1,4 +1,4 @@
-import { formatDistance } from '../utils/matchUtils';
+import { formatDistance } from '~/utils/matchUtils';
 
 interface DetailedStatsProps {
   headshotKills: number;

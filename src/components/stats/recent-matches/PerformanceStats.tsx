@@ -1,4 +1,4 @@
-import { formatNumber, formatTime } from '../utils/matchUtils';
+import { formatNumber, formatTime } from '~/utils/matchUtils';
 
 interface PerformanceStatsProps {
   kills: number;

@@ -2,7 +2,7 @@ import {
   getGameModeDisplayName,
   getMapDisplayName,
   getPlaceColor,
-} from '../utils/matchUtils';
+} from '~/utils/matchUtils';
 
 interface MatchHeaderProps {
   gameMode: string;
