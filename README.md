@@ -12,7 +12,7 @@ PUBG (PlayerUnknown's Battlegrounds) 경기 통계를 시각화하는 대시보�
 
 - 플레이어 이름으로 검색
 - 최근 매치 기록 조회
-- 플레이어 통계 요약
+- 매치 분석
 
 ### 📊 매치 분석
 
@@ -32,6 +32,12 @@ PUBG (PlayerUnknown's Battlegrounds) 경기 통계를 시각화하는 대시보�
 - 색상 코딩을 통한 데이터 구분
 - 반응형 디자인
 - 실시간 로딩 상태 표시
+
+## 🛠 개발 환경
+
+- Macbook Pro 16 (M1Max)
+  - Node v22.14.0
+  - Yarn 1.22.22
 
 ## 🛠 기술 스택
 
@@ -64,11 +70,6 @@ pubg-stats-dashboard/
 ```
 
 ## 🚀 시작하기
-
-### 필수 요구사항
-
-- Node.js 18.0.0 이상
-- Yarn 패키지 매니저
 
 ### 설치 및 실행
 
