@@ -40,3 +40,40 @@ export interface RankedGameModeStats {
   squad: GameModeStats;
   'squad-fpp': GameModeStats;
 }
+
+export interface PlayerDistance {
+  walk: number;
+  ride: number;
+  swim: number;
+  total: number;
+}
+
+export interface PlayerItems {
+  boosts: number;
+  heals: number;
+  weaponsAcquired: number;
+}
+
+export interface PlayerPerformance {
+  killStreaks: number;
+  longestKill: number;
+  revives: number;
+  DBNOs: number; // Down But Not Out
+}
+
+export interface PlayerStats {
+  name: string;
+  playerId: string;
+  kills: number;
+  assists: number;
+  damage: number;
+  headshotKills: number;
+  survivalTime: number;
+  winPlace: number;
+  killPlace: number;
+  distance: PlayerDistance;
+  items: PlayerItems;
+  performance: PlayerPerformance;
+}
+
+export type PlayerStatsData = PlayerStats[];

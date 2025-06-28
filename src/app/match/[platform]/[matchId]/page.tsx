@@ -6,6 +6,10 @@ import AnalysisCard from '~/components/match-analysis/AnalysisCard';
 import MatchSummaryCard from '~/components/match-analysis/MatchSummaryCard';
 
 import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
+import TeamRankCard from '~/components/match-analysis/TeamRankCard';
+import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
+import { usePlayerStats } from '~/components/match-analysis/hooks/usePlayerStats';
+import PlayerStatsCard from '~/components/match-analysis/PlayerStatsCard';
 
 const CARD_LIST = [
   {
@@ -77,6 +81,18 @@ export default function MatchAnalysisPage() {
     error: summaryError,
   } = useMatchSummary(platform ?? '', matchId ?? '');
 
+  const {
+    data: teamRankData,
+    isLoading: teamRankLoading,
+    error: teamRankError,
+  } = useTeamRank(platform ?? '', matchId ?? '');
+
+  const {
+    data: playerStatsData,
+    isLoading: playerStatsLoading,
+    error: playerStatsError,
+  } = usePlayerStats(platform ?? '', matchId ?? '');
+
   const handleBack = () => {
     router.back();
   };
@@ -95,26 +111,53 @@ export default function MatchAnalysisPage() {
           );
         }
 
-        if (summaryError) {
-          return (
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <div className="text-red-600 text-2xl mb-4">⚠️</div>
-              <p className="text-red-600 mb-2">
-                매치 요약 정보를 불러올 수 없습니다.
-              </p>
-              <p className="text-gray-600 text-sm">{summaryError.message}</p>
-            </div>
-          );
-        }
-
         if (summaryData) {
-          return <MatchSummaryCard summary={summaryData} />;
+          return (
+            <MatchSummaryCard
+              summary={summaryData}
+              error={summaryError?.message}
+            />
+          );
         }
 
         return (
           <div className="bg-white rounded-lg shadow-lg p-8 text-center">
             <p className="text-gray-600">매치 요약 정보가 없습니다.</p>
           </div>
+        );
+
+      case 'team':
+        if (teamRankLoading) {
+          return (
+            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">팀 순위 정보를 불러오는 중...</p>
+            </div>
+          );
+        }
+        return (
+          <TeamRankCard
+            teamRanks={teamRankData ?? []}
+            error={teamRankError?.message}
+          />
+        );
+
+      case 'player':
+        if (playerStatsLoading) {
+          return (
+            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">
+                플레이어 통계 정보를 불러오는 중...
+              </p>
+            </div>
+          );
+        }
+        return (
+          <PlayerStatsCard
+            playerStats={playerStatsData ?? []}
+            error={playerStatsError?.message}
+          />
         );
 
       default:
