@@ -10,6 +10,7 @@ import KillLeaderboardCard from '~/components/match-analysis/KillLeaderboardCard
 import DamageLeaderboardCard from '~/components/match-analysis/DamageLeaderboardCard';
 import SurvivalLeaderboardCard from '~/components/match-analysis/SurvivalLeaderboardCard';
 import TeamAnalysisCard from '~/components/match-analysis/TeamAnalysisCard';
+import MatchStatisticsCard from '~/components/match-analysis/MatchStatisticsCard';
 
 import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
 import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
@@ -18,6 +19,7 @@ import { useKills } from '~/components/match-analysis/hooks/useKills';
 import { useDamage } from '~/components/match-analysis/hooks/useDamage';
 import { useSurvival } from '~/components/match-analysis/hooks/useSurvival';
 import { useTeamAnalysis } from '~/components/match-analysis/hooks/useTeamAnalysis';
+import { useMatchStatistics } from '~/components/match-analysis/hooks/useMatchStatistics';
 
 const CARD_LIST = [
   {
@@ -125,6 +127,12 @@ export default function MatchAnalysisPage() {
     error: teamAnalysisError,
   } = useTeamAnalysis(platform ?? '', matchId ?? '');
 
+  const {
+    data: matchStatisticsData,
+    isLoading: matchStatisticsLoading,
+    error: matchStatisticsError,
+  } = useMatchStatistics(platform ?? '', matchId ?? '');
+
   const handleBack = () => {
     router.back();
   };
@@ -225,6 +233,15 @@ export default function MatchAnalysisPage() {
             teamAnalysis={teamAnalysisData ?? []}
             isLoading={teamAnalysisLoading}
             error={teamAnalysisError?.message}
+          />
+        );
+
+      case 'statistics':
+        return (
+          <MatchStatisticsCard
+            matchStatistics={matchStatisticsData ?? []}
+            isLoading={matchStatisticsLoading}
+            error={matchStatisticsError?.message}
           />
         );
 

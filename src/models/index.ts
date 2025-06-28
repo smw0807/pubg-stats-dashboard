@@ -11,3 +11,11 @@ export * from './killLeaderboard';
 export * from './damageLeaderboard';
 export * from './survivalLeaderboard';
 export * from './teamAnalysis';
+
+// Match Statistics
+export type {
+  MatchStatistics,
+  MatchSummary,
+  MatchAverages,
+  MatchExtremes,
+} from './matchStatistics';
