@@ -10,6 +10,8 @@ import TeamRankCard from '~/components/match-analysis/TeamRankCard';
 import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
 import { usePlayerStats } from '~/components/match-analysis/hooks/usePlayerStats';
 import PlayerStatsCard from '~/components/match-analysis/PlayerStatsCard';
+import KillLeaderboardCard from '~/components/match-analysis/KillLeaderboardCard';
+import { useKills } from '~/components/match-analysis/hooks/useKills';
 
 const CARD_LIST = [
   {
@@ -93,6 +95,12 @@ export default function MatchAnalysisPage() {
     error: playerStatsError,
   } = usePlayerStats(platform ?? '', matchId ?? '');
 
+  const {
+    data: killLeaderboardData,
+    isLoading: killLeaderboardLoading,
+    error: killLeaderboardError,
+  } = useKills(platform ?? '', matchId ?? '');
+
   const handleBack = () => {
     router.back();
   };
@@ -157,6 +165,15 @@ export default function MatchAnalysisPage() {
           <PlayerStatsCard
             playerStats={playerStatsData ?? []}
             error={playerStatsError?.message}
+          />
+        );
+
+      case 'kills':
+        return (
+          <KillLeaderboardCard
+            killLeaderboard={killLeaderboardData ?? []}
+            isLoading={killLeaderboardLoading}
+            error={killLeaderboardError?.message}
           />
         );
 
