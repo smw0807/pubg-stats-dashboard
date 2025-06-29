@@ -2,6 +2,7 @@ import AnalysisCard from './AnalysisCard';
 import { MatchStatistics } from '~/models/matchStatistics';
 import { getGameModeDisplayName, getMapDisplayName } from '~/utils/matchUtils';
 import { formatDuration } from '~/utils/dateUtils';
+import { formatDistance, formatTime } from '~/utils/matchUtils';
 
 interface MatchStatisticsCardProps {
   matchStatistics: MatchStatistics;
@@ -16,19 +17,6 @@ export default function MatchStatisticsCard({
 }: MatchStatisticsCardProps) {
   const handleCardClick = () => {
     // 매치 통계 데이터가 로드되면 자동으로 표시됨
-  };
-
-  const formatDistance = (meters: number) => {
-    if (meters >= 1000) {
-      return `${(meters / 1000).toFixed(1)}km`;
-    }
-    return `${Math.round(meters)}m`;
-  };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
   const renderSelectedCardContent = (matchStatistics: MatchStatistics) => {

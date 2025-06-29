@@ -21,7 +21,7 @@ export default function MatchCard({ match, index, platform }: MatchCardProps) {
   return (
     <div
       key={`${match.matchId}-${index}`}
-      className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+      className="border border-gray-300 rounded-lg p-4 hover:shadow-md transition-shadow"
     >
       <MatchHeader
         gameMode={match.gameMode}

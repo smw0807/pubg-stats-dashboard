@@ -13,7 +13,6 @@ function GameModeStats({
   formatNumber,
   formatPercentage,
 }: GameModeStatsProps) {
-  console.log('stats', stats);
   return (
     <div className="space-y-4">
       {/* 주요 통계 */}

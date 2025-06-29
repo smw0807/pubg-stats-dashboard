@@ -2,6 +2,7 @@ import React from 'react';
 import { getGameModeDisplayName, getMapDisplayName } from '~/utils/matchUtils';
 import { formatDuration, formatDate } from '~/utils/dateUtils';
 import AnalysisCard from './AnalysisCard';
+import { formatNumber } from '~/utils/matchUtils';
 
 interface MatchSummaryCardProps {
   summary: {
@@ -46,8 +47,6 @@ export default function MatchSummaryCard({
   error = null,
 }: MatchSummaryCardProps) {
   const winnerTeamId = summary.winner?.attributes?.stats?.teamId;
-  const winnerMembers =
-    summary.winner?.relationships?.participants?.data?.map((p) => p.id) || [];
   const topKiller = summary.topKiller?.attributes?.stats;
 
   const handleCardClick = () => {
@@ -132,17 +131,6 @@ export default function MatchSummaryCard({
                   </div>
                 </div>
               </div>
-              <div className="flex items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
-                <span className="text-yellow-500 mr-3">👑</span>
-                <div>
-                  <div className="text-sm text-gray-500">우승 멤버</div>
-                  <div className="font-semibold text-gray-800 text-sm">
-                    {winnerMembers.length > 0
-                      ? winnerMembers.join(', ')
-                      : '정보 없음'}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -218,7 +206,7 @@ export default function MatchSummaryCard({
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 text-center border border-green-200">
               <div className="text-3xl font-bold text-green-600 mb-2">
-                {Math.round(summary.matchStats.totalDamage)}
+                {formatNumber(summary.matchStats.totalDamage)}
               </div>
               <div className="text-sm font-medium text-green-700">
                 총 데미지
@@ -227,7 +215,7 @@ export default function MatchSummaryCard({
             </div>
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 text-center border border-blue-200">
               <div className="text-3xl font-bold text-blue-600 mb-2">
-                {Math.round(summary.matchStats.totalDistance)}m
+                {formatNumber(summary.matchStats.totalDistance)}m
               </div>
               <div className="text-sm font-medium text-blue-700">
                 총 이동거리

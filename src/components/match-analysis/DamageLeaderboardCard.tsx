@@ -1,5 +1,6 @@
 import AnalysisCard from './AnalysisCard';
 import { DamageLeaderboardData } from '~/models/damageLeaderboard';
+import { getRankColor, getRankIcon } from '~/utils/matchUtils';
 
 interface DamageLeaderboardCardProps {
   damageLeaderboard: DamageLeaderboardData;
@@ -14,20 +15,6 @@ export default function DamageLeaderboardCard({
 }: DamageLeaderboardCardProps) {
   const handleCardClick = () => {
     // 데미지 리더보드 데이터가 로드되면 자동으로 표시됨
-  };
-
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return 'text-white bg-yellow-500';
-    if (rank === 2) return 'text-white bg-gray-500';
-    if (rank === 3) return 'text-white bg-orange-500';
-    return 'text-white bg-gray-400';
-  };
-
-  const getRankIcon = (rank: number) => {
-    if (rank === 1) return '🥇';
-    if (rank === 2) return '🥈';
-    if (rank === 3) return '🥉';
-    return `${rank}`;
   };
 
   const renderSelectedCardContent = (

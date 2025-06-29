@@ -1,5 +1,6 @@
 import AnalysisCard from './AnalysisCard';
 import { SurvivalLeaderboardData } from '~/models/survivalLeaderboard';
+import { getRankColor, getRankIcon, formatTime } from '~/utils/matchUtils';
 
 interface SurvivalLeaderboardCardProps {
   survivalLeaderboard: SurvivalLeaderboardData;
@@ -14,26 +15,6 @@ export default function SurvivalLeaderboardCard({
 }: SurvivalLeaderboardCardProps) {
   const handleCardClick = () => {
     // 생존시간 리더보드 데이터가 로드되면 자동으로 표시됨
-  };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
-
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return 'text-white bg-yellow-500';
-    if (rank === 2) return 'text-white bg-gray-500';
-    if (rank === 3) return 'text-white bg-orange-500';
-    return 'text-white bg-gray-400';
-  };
-
-  const getRankIcon = (rank: number) => {
-    if (rank === 1) return '🥇';
-    if (rank === 2) return '🥈';
-    if (rank === 3) return '🥉';
-    return `${rank}`;
   };
 
   const renderSelectedCardContent = (
