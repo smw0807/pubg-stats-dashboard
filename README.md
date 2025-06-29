@@ -8,8 +8,8 @@ PUBG (PlayerUnknown's Battlegrounds) 경기 통계를 시각화하는 대시보�
 
 ## 배포 주소
 
-https://pubg-stats-dashboard-9jtk.vercel.app/  
-현재 PUBG 무료 API 키를 사용하고 있어서 1분에 10회 요청 제한이 있습니다.
+https://pubg-stats-dashboard.vercel.app/  
+현재 무료 PUBG API 키를 사용하고 있어서 1분에 10회 요청 제한이 있습니다.
 
 ## ✨ 주요 기능
 
