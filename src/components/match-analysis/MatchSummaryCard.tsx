@@ -46,8 +46,6 @@ export default function MatchSummaryCard({
   error = null,
 }: MatchSummaryCardProps) {
   const winnerTeamId = summary.winner?.attributes?.stats?.teamId;
-  const winnerMembers =
-    summary.winner?.relationships?.participants?.data?.map((p) => p.id) || [];
   const topKiller = summary.topKiller?.attributes?.stats;
 
   const handleCardClick = () => {
@@ -129,17 +127,6 @@ export default function MatchSummaryCard({
                   <div className="text-sm text-gray-500">우승 팀</div>
                   <div className="font-semibold text-gray-800">
                     팀 {winnerTeamId}
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
-                <span className="text-yellow-500 mr-3">👑</span>
-                <div>
-                  <div className="text-sm text-gray-500">우승 멤버</div>
-                  <div className="font-semibold text-gray-800 text-sm">
-                    {winnerMembers.length > 0
-                      ? winnerMembers.join(', ')
-                      : '정보 없음'}
                   </div>
                 </div>
               </div>
