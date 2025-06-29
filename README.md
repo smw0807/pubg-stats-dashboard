@@ -6,6 +6,11 @@ PUBG (PlayerUnknown's Battlegrounds) 경기 통계를 시각화하는 대시보�
 
 이 프로젝트는 PUBG 매치 데이터를 분석하고 다양한 통계 정보를 직관적으로 시각화하는 웹 애플리케이션입니다. 플레이어 검색, 매치 분석, 팀 성과 분석 등 다양한 기능을 제공합니다.
 
+## 배포 주소
+
+https://pubg-stats-dashboard-9jtk.vercel.app/  
+현재 PUBG 무료 API 키를 사용하고 있어서 1분에 10회 요청 제한이 있습니다.
+
 ## ✨ 주요 기능
 
 ### 🔍 플레이어 검색
