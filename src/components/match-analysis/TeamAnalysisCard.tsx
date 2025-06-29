@@ -1,5 +1,11 @@
 import AnalysisCard from './AnalysisCard';
 import { TeamAnalysisData } from '~/models/teamAnalysis';
+import {
+  getRankColor,
+  getRankIcon,
+  formatDistance,
+  formatTime,
+} from '~/utils/matchUtils';
 
 interface TeamAnalysisCardProps {
   teamAnalysis: TeamAnalysisData;
@@ -14,33 +20,6 @@ export default function TeamAnalysisCard({
 }: TeamAnalysisCardProps) {
   const handleCardClick = () => {
     // 팀 분석 데이터가 로드되면 자동으로 표시됨
-  };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
-
-  const formatDistance = (meters: number) => {
-    if (meters >= 1000) {
-      return `${(meters / 1000).toFixed(1)}km`;
-    }
-    return `${Math.round(meters)}m`;
-  };
-
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return 'text-white bg-yellow-500';
-    if (rank === 2) return 'text-white bg-gray-500';
-    if (rank === 3) return 'text-white bg-orange-500';
-    return 'text-white bg-gray-400';
-  };
-
-  const getRankIcon = (rank: number) => {
-    if (rank === 1) return '🥇';
-    if (rank === 2) return '🥈';
-    if (rank === 3) return '🥉';
-    return `${rank}`;
   };
 
   const renderSelectedCardContent = (teamAnalysis: TeamAnalysisData) => {

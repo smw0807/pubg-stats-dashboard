@@ -1,5 +1,6 @@
 import AnalysisCard from './AnalysisCard';
 import { TeamRankData } from '~/models/teamRank';
+import { formatDistance, formatTime } from '~/utils/matchUtils';
 
 interface TeamRankCardProps {
   teamRanks: TeamRankData;
@@ -14,19 +15,6 @@ export default function TeamRankCard({
 }: TeamRankCardProps) {
   const handleCardClick = () => {
     // 팀 순위 데이터가 로드되면 자동으로 표시됨
-  };
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
-
-  const formatDistance = (meters: number) => {
-    if (meters >= 1000) {
-      return `${(meters / 1000).toFixed(1)}km`;
-    }
-    return `${Math.round(meters)}m`;
   };
 
   const renderSelectedCardContent = (teamRanks: TeamRankData) => {

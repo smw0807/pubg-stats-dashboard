@@ -2,6 +2,11 @@
 
 import type { RankedGameModeStats } from '~/models/playerStats';
 import GameModeStats from './GameModeStats';
+import {
+  formatNumber,
+  formatPercentage,
+  getTierColor,
+} from '~/utils/matchUtils';
 
 interface PlayerStatsProps {
   playerName: string;
@@ -16,34 +21,6 @@ export default function PlayerStats({
   stats,
   onNewSearch,
 }: PlayerStatsProps) {
-  const formatNumber = (num: number) => {
-    if (num === 0) return '0';
-    return num.toLocaleString();
-  };
-
-  const formatPercentage = (num: number) => {
-    return (num * 100).toFixed(1) + '%';
-  };
-
-  const getTierColor = (tier: string) => {
-    switch (tier.toLowerCase()) {
-      case 'bronze':
-        return 'text-amber-700';
-      case 'silver':
-        return 'text-gray-600';
-      case 'gold':
-        return 'text-yellow-600';
-      case 'platinum':
-        return 'text-cyan-600';
-      case 'diamond':
-        return 'text-purple-600';
-      case 'master':
-        return 'text-pink-600';
-      default:
-        return 'text-red-600';
-    }
-  };
-
   return (
     <div className="p-4">
       <div className="max-w-7xl mx-auto">

@@ -16,6 +16,10 @@ export const formatDistance = (meters: number) => {
   return `${(meters / 1000).toFixed(1)}km`;
 };
 
+export const formatPercentage = (num: number) => {
+  return (num * 100).toFixed(1) + '%';
+};
+
 export const getGameModeDisplayName = (gameMode: string) => {
   switch (gameMode) {
     case 'solo':
@@ -57,4 +61,37 @@ export const getPlaceColor = (place: number) => {
   if (place <= 3) return 'text-orange-600 font-semibold';
   if (place <= 10) return 'text-blue-600 font-medium';
   return 'text-gray-600';
+};
+
+export const getTierColor = (tier: string) => {
+  switch (tier.toLowerCase()) {
+    case 'bronze':
+      return 'text-amber-700';
+    case 'silver':
+      return 'text-gray-600';
+    case 'gold':
+      return 'text-yellow-600';
+    case 'platinum':
+      return 'text-cyan-600';
+    case 'diamond':
+      return 'text-purple-600';
+    case 'master':
+      return 'text-pink-600';
+    default:
+      return 'text-red-600';
+  }
+};
+
+export const getRankColor = (rank: number) => {
+  if (rank === 1) return 'text-white bg-yellow-500';
+  if (rank === 2) return 'text-white bg-gray-500';
+  if (rank === 3) return 'text-white bg-orange-500';
+  return 'text-white bg-gray-400';
+};
+
+export const getRankIcon = (rank: number) => {
+  if (rank === 1) return '🥇';
+  if (rank === 2) return '🥈';
+  if (rank === 3) return '🥉';
+  return `${rank}`;
 };

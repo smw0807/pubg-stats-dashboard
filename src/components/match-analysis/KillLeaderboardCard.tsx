@@ -1,5 +1,6 @@
 import AnalysisCard from './AnalysisCard';
 import { KillLeaderboardData } from '~/models/killLeaderboard';
+import { getRankColor, getRankIcon } from '~/utils/matchUtils';
 
 interface KillLeaderboardCardProps {
   killLeaderboard: KillLeaderboardData;
@@ -21,20 +22,6 @@ export default function KillLeaderboardCard({
       return `${(meters / 1000).toFixed(1)}km`;
     }
     return `${Math.round(meters)}m`;
-  };
-
-  const getRankColor = (rank: number) => {
-    if (rank === 1) return 'text-white bg-yellow-500';
-    if (rank === 2) return 'text-white bg-gray-500';
-    if (rank === 3) return 'text-white bg-orange-500';
-    return 'text-white bg-gray-400';
-  };
-
-  const getRankIcon = (rank: number) => {
-    if (rank === 1) return '🥇';
-    if (rank === 2) return '🥈';
-    if (rank === 3) return '🥉';
-    return `${rank}`;
   };
 
   const renderSelectedCardContent = (killLeaderboard: KillLeaderboardData) => {
