@@ -24,6 +24,5 @@ export const useTeamAnalysis = (platform: string, matchId: string) => {
     queryFn: () => fetchTeamAnalysis(platform, matchId),
     enabled: !!platform && !!matchId,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };

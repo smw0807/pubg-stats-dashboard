@@ -24,6 +24,5 @@ export const usePlayerStats = (platform: string, matchId: string) => {
     queryFn: () => fetchPlayerStats(platform, matchId),
     enabled: !!platform && !!matchId,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };

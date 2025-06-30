@@ -24,6 +24,5 @@ export const useMatchStatistics = (platform: string, matchId: string) => {
     queryFn: () => fetchMatchStatistics(platform, matchId),
     enabled: !!platform && !!matchId,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };

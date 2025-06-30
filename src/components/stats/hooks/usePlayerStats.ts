@@ -42,7 +42,6 @@ export const usePlayerRankStats = (platform: string, playerName: string) => {
     queryFn: () => fetchPlayerRankStats({ platform, playerName }),
     enabled: !!platform && !!playerName,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };
 
@@ -52,6 +51,5 @@ export const usePlayerStats = (platform: string, playerName: string) => {
     queryFn: () => fetchPlayerStats({ platform, playerName }),
     enabled: !!platform && !!playerName,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };

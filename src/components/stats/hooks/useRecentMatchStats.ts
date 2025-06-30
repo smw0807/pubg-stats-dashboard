@@ -25,6 +25,5 @@ export const useRecentMatchStats = (platform: string, playerName: string) => {
     queryFn: () => fetchRecentMatchStats({ platform, playerName }),
     enabled: !!platform && !!playerName,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };

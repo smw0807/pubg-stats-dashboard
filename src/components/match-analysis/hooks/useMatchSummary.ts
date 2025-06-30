@@ -24,6 +24,5 @@ export const useMatchSummary = (platform: string, matchId: string) => {
     queryFn: () => fetchMatchSummary({ platform, matchId }),
     enabled: !!platform && !!matchId,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };
