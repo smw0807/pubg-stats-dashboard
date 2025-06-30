@@ -18,6 +18,41 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // SEO 최적화 설정
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
+  // 이미지 최적화
+  images: {
+    domains: ['pubg-stats-dashboard.vercel.app'],
+    formats: ['image/webp', 'image/avif'],
+  },
+  // 헤더 설정
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

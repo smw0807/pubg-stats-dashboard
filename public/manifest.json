@@ -1,0 +1,31 @@
+{
+  "name": "PUBG 전적 분석 대시보드",
+  "short_name": "PUBG Stats",
+  "description": "PUBG 배틀그라운드 플레이어 전적 검색, 매치 분석, 팀 통계를 제공하는 실시간 전적 대시보드",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e40af",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["games", "utilities"],
+  "lang": "ko",
+  "dir": "ltr"
+}
