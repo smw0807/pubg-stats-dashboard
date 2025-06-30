@@ -3,7 +3,7 @@
 import { useParams, useRouter } from 'next/navigation';
 import {
   usePlayerRankStats,
-  usePlayerStats,
+  // usePlayerStats,
 } from '~/components/stats/hooks/usePlayerStats';
 import PlayerStats from '~/components/stats/PlayerStats';
 import RecentMatchStats from '~/components/stats/RecentMatchStats';
@@ -20,17 +20,17 @@ export default function PlayerPage() {
     error: rankStatsError,
   } = usePlayerRankStats(platform, playerName);
 
-  const {
-    data: normalStats,
-    isLoading: normalStatsLoading,
-    error: normalStatsError,
-  } = usePlayerStats(platform, playerName);
+  // const {
+  //   data: normalStats,
+  //   isLoading: normalStatsLoading,
+  //   error: normalStatsError,
+  // } = usePlayerStats(platform, playerName);
 
   const handleNewSearch = () => {
     router.push('/');
   };
 
-  if (rankStatsLoading && normalStatsLoading) {
+  if (rankStatsLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
@@ -41,14 +41,12 @@ export default function PlayerPage() {
     );
   }
 
-  if (rankStatsError && normalStatsError) {
+  if (rankStatsError) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-red-600 mb-4">오류 발생</h1>
-          <p className="text-gray-600 mb-4">
-            {rankStatsError?.message || normalStatsError?.message}
-          </p>
+          <p className="text-gray-600 mb-4">{rankStatsError?.message}</p>
           <button
             onClick={() => window.history.back()}
             className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
@@ -60,7 +58,7 @@ export default function PlayerPage() {
     );
   }
 
-  if (!rankStats && !normalStats) {
+  if (!rankStats) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
@@ -94,11 +92,6 @@ export default function PlayerPage() {
         )}
       </div>
 
-      {/* 최근 매치 통계 */}
-      <div className="mx-auto px-4 pb-8">
-        <RecentMatchStats platform={platform} playerName={playerName} />
-      </div>
-
       {/* <div>
         {normalStats && (
           <PlayerStats
@@ -109,6 +102,10 @@ export default function PlayerPage() {
           />
         )}
       </div> */}
+      {/* 최근 매치 통계 */}
+      <div className="mx-auto px-4 pb-8">
+        <RecentMatchStats platform={platform} playerName={playerName} />
+      </div>
     </div>
   );
 }

@@ -24,6 +24,5 @@ export const useDamage = (platform: string, matchId: string) => {
     queryFn: () => fetchDamage(platform, matchId),
     enabled: !!platform && !!matchId,
     staleTime: 1000 * 60 * 5, // 5분
-    retry: 1,
   });
 };
