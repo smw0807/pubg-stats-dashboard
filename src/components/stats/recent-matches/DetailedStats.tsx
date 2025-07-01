@@ -30,7 +30,7 @@ export default function DetailedStats({
         </div>
       </div>
       <div className="bg-gray-50 rounded px-3 py-2">
-        <div className="text-gray-500 text-xs mb-1">킬 스트릭</div>
+        <div className="text-gray-500 text-xs mb-1">연속 킬</div>
         <div className="font-semibold text-gray-800">{killStreaks}</div>
       </div>
       <div className="bg-gray-50 rounded px-3 py-2">
