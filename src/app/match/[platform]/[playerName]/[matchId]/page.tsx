@@ -86,6 +86,7 @@ export default function MatchAnalysisPage() {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const platform = params.platform as string;
   const matchId = params.matchId as string;
+  const playerName = params.playerName as string;
 
   const {
     data: summaryData,
@@ -164,6 +165,7 @@ export default function MatchAnalysisPage() {
             teamRanks={teamRankData ?? []}
             isLoading={teamRankLoading}
             error={teamRankError?.message}
+            playerName={playerName}
           />
         );
 
@@ -173,6 +175,7 @@ export default function MatchAnalysisPage() {
             playerStats={playerStatsData ?? []}
             isLoading={playerStatsLoading}
             error={playerStatsError?.message}
+            playerName={playerName}
           />
         );
 
@@ -182,6 +185,7 @@ export default function MatchAnalysisPage() {
             killLeaderboard={killLeaderboardData ?? []}
             isLoading={killLeaderboardLoading}
             error={killLeaderboardError?.message}
+            playerName={playerName}
           />
         );
 
@@ -191,6 +195,7 @@ export default function MatchAnalysisPage() {
             damageLeaderboard={damageLeaderboardData ?? []}
             isLoading={damageLeaderboardLoading}
             error={damageLeaderboardError?.message}
+            playerName={playerName}
           />
         );
 
@@ -200,6 +205,7 @@ export default function MatchAnalysisPage() {
             survivalLeaderboard={survivalLeaderboardData ?? []}
             isLoading={survivalLeaderboardLoading}
             error={survivalLeaderboardError?.message}
+            playerName={playerName}
           />
         );
 
@@ -209,6 +215,17 @@ export default function MatchAnalysisPage() {
             teamAnalysis={teamAnalysisData ?? []}
             isLoading={teamAnalysisLoading}
             error={teamAnalysisError?.message}
+            playerName={playerName}
+          />
+        );
+
+      case 'playerPerformance':
+        return (
+          <PlayerPerformanceCard
+            playerPerformance={playerPerformanceData ?? []}
+            isLoading={playerPerformanceLoading}
+            error={playerPerformanceError?.message}
+            playerName={playerName}
           />
         );
 
@@ -220,16 +237,6 @@ export default function MatchAnalysisPage() {
             error={matchStatisticsError?.message}
           />
         );
-
-      case 'playerPerformance':
-        return (
-          <PlayerPerformanceCard
-            playerPerformance={playerPerformanceData ?? []}
-            isLoading={playerPerformanceLoading}
-            error={playerPerformanceError?.message}
-          />
-        );
-
       default:
         return (
           <div className="bg-white rounded-lg shadow-lg p-8 text-center text-xl text-blue-700 font-semibold">

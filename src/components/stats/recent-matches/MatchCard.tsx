@@ -9,13 +9,19 @@ interface MatchCardProps {
   match: RecentMatch;
   index: number;
   platform: string;
+  playerName: string;
 }
 
-export default function MatchCard({ match, index, platform }: MatchCardProps) {
+export default function MatchCard({
+  match,
+  index,
+  platform,
+  playerName,
+}: MatchCardProps) {
   const router = useRouter();
 
   const handleAnalyze = () => {
-    router.push(`/match/${platform}/${match.matchId}`);
+    router.push(`/match/${platform}/${playerName}/${match.matchId}`);
   };
 
   return (

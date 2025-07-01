@@ -3,49 +3,13 @@ import { getGameModeDisplayName, getMapDisplayName } from '~/utils/matchUtils';
 import { formatDuration, formatDate } from '~/utils/dateUtils';
 import AnalysisCard from './AnalysisCard';
 import { formatNumber } from '~/utils/matchUtils';
-
-interface MatchSummaryCardProps {
-  summary: {
-    matchId: string;
-    gameMode: string;
-    mapName: string;
-    duration: number;
-    createdAt: string;
-    totalPlayers: number;
-    totalTeams: number;
-    winner: {
-      attributes: {
-        stats: { teamId: number };
-      };
-      relationships: {
-        participants: { data: { id: string }[] };
-      };
-    };
-    topKiller: {
-      attributes: {
-        stats: {
-          name: string;
-          kills: number;
-          damageDealt: number;
-          timeSurvived: number;
-        };
-      };
-    };
-    matchStats: {
-      totalKills: number;
-      totalDamage: number;
-      totalDistance: number;
-    };
-  };
-  isLoading?: boolean;
-  error?: string | null;
-}
+import { MatchSummary } from '~/models/summary';
 
 export default function MatchSummaryCard({
   summary,
   isLoading = false,
   error = null,
-}: MatchSummaryCardProps) {
+}: MatchSummary) {
   const winnerTeamId = summary.winner?.attributes?.stats?.teamId;
   const topKiller = summary.topKiller?.attributes?.stats;
 
@@ -53,9 +17,7 @@ export default function MatchSummaryCard({
     // 매치 요약 데이터가 로드되면 자동으로 표시됨
   };
 
-  const renderSelectedCardContent = (
-    summary: MatchSummaryCardProps['summary']
-  ) => {
+  const renderSelectedCardContent = (summary: MatchSummary['summary']) => {
     return (
       <div className="space-y-8">
         {/* 기본 정보 그리드 */}

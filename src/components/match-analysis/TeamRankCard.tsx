@@ -6,12 +6,14 @@ interface TeamRankCardProps {
   teamRanks: TeamRankData;
   isLoading?: boolean;
   error?: string | null;
+  playerName: string;
 }
 
 export default function TeamRankCard({
   teamRanks,
   isLoading = false,
   error = null,
+  playerName,
 }: TeamRankCardProps) {
   const handleCardClick = () => {
     // 팀 순위 데이터가 로드되면 자동으로 표시됨
@@ -33,6 +35,10 @@ export default function TeamRankCard({
             key={team.teamId}
             className={`border rounded-lg p-4 ${
               team.won ? 'border-yellow-400 bg-yellow-50' : 'border-gray-200'
+            } ${
+              team.participants.find((p) => p.name === playerName)
+                ? 'border-red-600 border-2'
+                : ''
             }`}
           >
             <div className="flex items-center justify-between mb-3">
@@ -89,7 +95,11 @@ export default function TeamRankCard({
                 >
                   <div className="flex items-center space-x-2">
                     <span className="font-medium text-gray-800">
-                      {participant.name}
+                      {participant.name === playerName ? (
+                        <>{participant.name} (나)</>
+                      ) : (
+                        participant.name
+                      )}
                     </span>
                   </div>
                   <div className="flex items-center space-x-4 text-gray-600">

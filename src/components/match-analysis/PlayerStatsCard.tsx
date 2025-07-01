@@ -11,12 +11,14 @@ interface PlayerStatsCardProps {
   playerStats: PlayerStatsData;
   isLoading?: boolean;
   error?: string | null;
+  playerName: string;
 }
 
 export default function PlayerStatsCard({
   playerStats,
   isLoading = false,
   error = null,
+  playerName,
 }: PlayerStatsCardProps) {
   const handleCardClick = () => {
     // 플레이어 통계 데이터가 로드되면 자동으로 표시됨
@@ -108,7 +110,11 @@ export default function PlayerStatsCard({
             {sortedPlayers.map((player) => (
               <div
                 key={player.playerId}
-                className="border rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                className={`border rounded-lg p-4 hover:bg-gray-50 transition-colors ${
+                  player.name === playerName
+                    ? 'border-red-600 border-2'
+                    : 'border-gray-300'
+                }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-3">
@@ -121,7 +127,11 @@ export default function PlayerStatsCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800">
-                        {player.name}
+                        {player.name === playerName ? (
+                          <>{player.name} (나)</>
+                        ) : (
+                          player.name
+                        )}
                       </h4>
                       <p className="text-sm text-gray-600">
                         킬: {player.kills} | 어시스트: {player.assists} |

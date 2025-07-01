@@ -6,12 +6,14 @@ interface KillLeaderboardCardProps {
   killLeaderboard: KillLeaderboardData;
   isLoading?: boolean;
   error?: string | null;
+  playerName: string;
 }
 
 export default function KillLeaderboardCard({
   killLeaderboard,
   isLoading = false,
   error = null,
+  playerName,
 }: KillLeaderboardCardProps) {
   const handleCardClick = () => {
     // 킬 리더보드 데이터가 로드되면 자동으로 표시됨
@@ -115,6 +117,10 @@ export default function KillLeaderboardCard({
                 key={`${player.name}-${index}`}
                 className={`border rounded-lg p-3 hover:bg-gray-50 transition-colors ${
                   index < 3 ? 'border-2' : 'border-gray-200'
+                } ${
+                  player.name === playerName
+                    ? 'border-red-600 border-2'
+                    : 'border-gray-300'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -128,7 +134,11 @@ export default function KillLeaderboardCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800">
-                        {player.name}
+                        {player.name === playerName ? (
+                          <>{player.name} (나)</>
+                        ) : (
+                          player.name
+                        )}
                       </h4>
                       <p className="text-sm text-gray-600">
                         최종 순위: {player.winPlace}위
