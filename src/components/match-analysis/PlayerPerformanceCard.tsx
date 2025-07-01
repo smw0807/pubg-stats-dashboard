@@ -6,12 +6,14 @@ interface PlayerPerformanceCardProps {
   playerPerformance: PlayerPerformanceAnalysis[];
   isLoading?: boolean;
   error?: string | null;
+  playerName: string;
 }
 
 export default function PlayerPerformanceCard({
   playerPerformance,
   isLoading = false,
   error = null,
+  playerName,
 }: PlayerPerformanceCardProps) {
   const handleCardClick = () => {
     // 플레이어 성과 데이터가 로드되면 자동으로 표시됨
@@ -104,11 +106,15 @@ export default function PlayerPerformanceCard({
             <span className="mr-2">📊</span>
             전체 플레이어 성과 분석 ({players.length}명)
           </h3>
-          <div className="space-y-4 max-h-[600px] overflow-y-auto">
+          <div className={`space-y-4 max-h-[600px] overflow-y-auto`}>
             {players.map((player) => (
               <div
                 key={player.playerId}
-                className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
+                className={`bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow ${
+                  player.name === playerName
+                    ? 'border-red-600 border-2'
+                    : 'border-gray-200'
+                }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-3">

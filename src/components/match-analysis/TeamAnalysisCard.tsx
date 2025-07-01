@@ -11,12 +11,14 @@ interface TeamAnalysisCardProps {
   teamAnalysis: TeamAnalysisData;
   isLoading?: boolean;
   error?: string | null;
+  playerName: string;
 }
 
 export default function TeamAnalysisCard({
   teamAnalysis,
   isLoading = false,
   error = null,
+  playerName,
 }: TeamAnalysisCardProps) {
   const handleCardClick = () => {
     // 팀 분석 데이터가 로드되면 자동으로 표시됨
@@ -109,6 +111,15 @@ export default function TeamAnalysisCard({
                 key={team.teamId}
                 className={`border rounded-lg p-4 hover:bg-gray-50 transition-colors ${
                   team.won ? 'border-2 border-yellow-400' : 'border-gray-200'
+                } ${
+                  team.topPerformers.topKiller.name === playerName
+                    ? 'border-red-600 border-2'
+                    : team.topPerformers.topDamage.name === playerName
+                    ? 'border-red-600 border-2'
+                    : team.topPerformers.topSurvivor.name === playerName
+                    ? 'border-red-600 border-2'
+                    : 'border-gray-300'
+                  // : 'border-gray-300'
                 }`}
               >
                 {/* 팀 헤더 */}
