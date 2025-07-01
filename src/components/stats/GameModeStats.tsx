@@ -61,11 +61,11 @@ function GameModeStats({
           </div>
           <div className="text-center p-3 bg-green-50 rounded-lg">
             <div className="text-xl font-bold text-green-600">
-              {formatPercentage(stats.winRatio)}
+              {Math.round(stats.damageDealt / stats.roundsPlayed)}
             </div>
-            <div className="text-sm text-gray-600">승률</div>
+            <div className="text-sm text-gray-600">평균 딜량</div>
             <div className="text-xs text-gray-500">
-              {stats.wins}승/{stats.roundsPlayed}게임
+              누적 {formatNumber(stats.damageDealt)}
             </div>
           </div>
         </div>
@@ -80,9 +80,15 @@ function GameModeStats({
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-600">평균 순위</span>
+          <span className="text-gray-600">승리</span>
           <span className="font-semibold text-gray-900">
-            {stats.avgRank.toFixed(1)}
+            {formatNumber(stats.wins)}
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-600">승률</span>
+          <span className="font-semibold text-gray-900">
+            {formatPercentage(stats.winRatio)}
           </span>
         </div>
         <div className="flex justify-between">
@@ -92,15 +98,9 @@ function GameModeStats({
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-600">총 킬</span>
+          <span className="text-gray-600">평균 순위</span>
           <span className="font-semibold text-gray-900">
-            {formatNumber(stats.kills)}
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-gray-600">데미지</span>
-          <span className="font-semibold text-gray-900">
-            {formatNumber(stats.damageDealt)}
+            {stats.avgRank.toFixed(1)}
           </span>
         </div>
       </div>
