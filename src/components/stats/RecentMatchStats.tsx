@@ -45,6 +45,7 @@ export default function RecentMatchStats({
               match={match}
               index={index}
               platform={platform}
+              playerName={playerName}
             />
           );
         })}

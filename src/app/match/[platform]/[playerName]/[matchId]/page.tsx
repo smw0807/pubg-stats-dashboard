@@ -86,6 +86,7 @@ export default function MatchAnalysisPage() {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const platform = params.platform as string;
   const matchId = params.matchId as string;
+  const playerName = params.playerName as string;
 
   const {
     data: summaryData,
