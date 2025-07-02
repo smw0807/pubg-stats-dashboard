@@ -36,6 +36,18 @@ export const getGameModeDisplayName = (gameMode: string) => {
       return '솔로 FPP';
     case 'squad-fpp':
       return '스쿼드 FPP';
+    case 'normal-solo':
+      return '솔로 (일반)';
+    case 'normal-duo':
+      return '듀오 (일반)';
+    case 'normal-squad':
+      return '스쿼드 (일반)';
+    case 'normal-solo-fpp':
+      return '솔로 FPP (일반)';
+    case 'normal-duo-fpp':
+      return '듀오 FPP (일반)';
+    case 'normal-squad-fpp':
+      return '스쿼드 FPP (일반)';
     default:
       return gameMode;
   }
@@ -55,6 +67,12 @@ export const getMapDisplayName = (mapName: string) => {
       return '태이고';
     case 'Neon_Main':
       return '론도';
+    case 'Heaven_Main':
+      return '헤이븐';
+    case 'Summerland_Main':
+      return '카라킨';
+    case 'Chimera_Main':
+      return '파라모';
     default:
       return mapName;
   }
