@@ -39,6 +39,7 @@ export interface RankedGameModeStats {
   all: GameModeStats;
   squad: GameModeStats;
   'squad-fpp': GameModeStats;
+  banType: 'Innocent' | 'TemporaryBan' | 'PermanentBan'; // 무죄, 임시정지, 영구정지
 }
 
 export interface PlayerDistance {
