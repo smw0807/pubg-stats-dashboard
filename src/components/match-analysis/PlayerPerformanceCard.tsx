@@ -127,7 +127,11 @@ export default function PlayerPerformanceCard({
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900">
-                        {player.name}
+                        {player.name === playerName ? (
+                          <>{player.name} (나)</>
+                        ) : (
+                          player.name
+                        )}
                       </div>
                       <div className="text-sm text-gray-500">
                         #{player.winPlace}위
