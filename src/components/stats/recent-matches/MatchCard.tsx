@@ -32,9 +32,9 @@ export default function MatchCard({
       <MatchHeader
         gameMode={match.gameMode}
         mapName={match.mapName}
-        matchId={match.matchId}
         rank={match.team.rank}
         won={match.team.won}
+        matchDate={match.matchDate}
       />
 
       <PerformanceStats

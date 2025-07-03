@@ -7,17 +7,17 @@ import {
 interface MatchHeaderProps {
   gameMode: string;
   mapName: string;
-  matchId: string;
   rank: number;
   won: string;
+  matchDate: string;
 }
 
 export default function MatchHeader({
   gameMode,
   mapName,
-  matchId,
   rank,
   won,
+  matchDate,
 }: MatchHeaderProps) {
   return (
     <div className="flex justify-between items-start mb-3">
@@ -25,7 +25,9 @@ export default function MatchHeader({
         <h3 className="font-semibold text-gray-800">
           {getGameModeDisplayName(gameMode)} - {getMapDisplayName(mapName)}
         </h3>
-        <p className="text-sm text-gray-500">{matchId.slice(0, 8)}...</p>
+        <p className="text-sm text-gray-500">
+          {new Date(matchDate).toLocaleString()}
+        </p>
       </div>
       <div className="text-right">
         <span className={`text-lg ${getPlaceColor(rank)}`}>{rank}위</span>

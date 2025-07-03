@@ -5,16 +5,12 @@ import LoadingState from './recent-matches/LoadingState';
 import ErrorState from './recent-matches/ErrorState';
 import EmptyState from './recent-matches/EmptyState';
 import MatchCard from './recent-matches/MatchCard';
-
-interface RecentMatchStatsProps {
-  platform: string;
-  playerName: string;
-}
+import { SearchParams } from '~/models';
 
 export default function RecentMatchStats({
   platform,
   playerName,
-}: RecentMatchStatsProps) {
+}: SearchParams) {
   const {
     data: recentMatches,
     isLoading,

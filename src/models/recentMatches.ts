@@ -43,6 +43,7 @@ export interface RecentMatch {
   movement: MatchMovement;
   items: MatchItems;
   team: MatchTeam;
+  matchDate: string;
 }
 
 export type RecentMatches = RecentMatch[];
