@@ -292,7 +292,7 @@ export default function Home() {
             이 사이트는 PUBG 공식 API를 사용하여 실시간 데이터를 제공합니다.
           </p>
           <p className="text-sm">
-            © 2024 PUBG Stats Dashboard. 모든 게임 데이터는 PUBG Corporation의
+            © 2025 PUBG Stats Dashboard. 모든 게임 데이터는 PUBG Corporation의
             소유입니다.
           </p>
         </div>
