@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { TeamRankData } from '~/models/teamRank';
 import { formatDistance, formatTime } from '~/utils/matchUtils';
-
-interface TeamRankCardProps {
-  teamRanks: TeamRankData;
-  isLoading?: boolean;
-  error?: string | null;
-  playerName: string;
-}
+import { useTeamRank } from './hooks/useTeamRank';
 
 export default function TeamRankCard({
-  teamRanks,
-  isLoading = false,
-  error = null,
+  platform,
+  matchId,
   playerName,
-}: TeamRankCardProps) {
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  playerName: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: teamRanks,
+    isLoading,
+    error,
+  } = useTeamRank(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 팀 순위 데이터가 로드되면 자동으로 표시됨
   };

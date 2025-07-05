@@ -13,16 +13,6 @@ import TeamAnalysisCard from '~/components/match-analysis/TeamAnalysisCard';
 import MatchStatisticsCard from '~/components/match-analysis/MatchStatisticsCard';
 import PlayerPerformanceCard from '~/components/match-analysis/PlayerPerformanceCard';
 
-import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
-import { useTeamRank } from '~/components/match-analysis/hooks/useTeamRank';
-import { usePlayerStats } from '~/components/match-analysis/hooks/usePlayerStats';
-import { useKills } from '~/components/match-analysis/hooks/useKills';
-import { useDamage } from '~/components/match-analysis/hooks/useDamage';
-import { useSurvival } from '~/components/match-analysis/hooks/useSurvival';
-import { useTeamAnalysis } from '~/components/match-analysis/hooks/useTeamAnalysis';
-import { useMatchStatistics } from '~/components/match-analysis/hooks/useMatchStatistics';
-import { usePlayerPerformance } from '~/components/match-analysis/hooks/usePlayerPerformance';
-
 const CARD_LIST = [
   {
     key: 'summary',
@@ -84,63 +74,10 @@ export default function MatchAnalysisPage() {
   const router = useRouter();
   const params = useParams();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const platform = params.platform as string;
   const matchId = params.matchId as string;
   const playerName = params.playerName as string;
-
-  const {
-    data: summaryData,
-    isLoading: summaryLoading,
-    error: summaryError,
-  } = useMatchSummary(platform ?? '', matchId ?? '');
-
-  const {
-    data: teamRankData,
-    isLoading: teamRankLoading,
-    error: teamRankError,
-  } = useTeamRank(platform ?? '', matchId ?? '');
-
-  const {
-    data: playerStatsData,
-    isLoading: playerStatsLoading,
-    error: playerStatsError,
-  } = usePlayerStats(platform ?? '', matchId ?? '');
-
-  const {
-    data: killLeaderboardData,
-    isLoading: killLeaderboardLoading,
-    error: killLeaderboardError,
-  } = useKills(platform ?? '', matchId ?? '');
-
-  const {
-    data: damageLeaderboardData,
-    isLoading: damageLeaderboardLoading,
-    error: damageLeaderboardError,
-  } = useDamage(platform ?? '', matchId ?? '');
-
-  const {
-    data: survivalLeaderboardData,
-    isLoading: survivalLeaderboardLoading,
-    error: survivalLeaderboardError,
-  } = useSurvival(platform ?? '', matchId ?? '');
-
-  const {
-    data: teamAnalysisData,
-    isLoading: teamAnalysisLoading,
-    error: teamAnalysisError,
-  } = useTeamAnalysis(platform ?? '', matchId ?? '');
-
-  const {
-    data: matchStatisticsData,
-    isLoading: matchStatisticsLoading,
-    error: matchStatisticsError,
-  } = useMatchStatistics(platform ?? '', matchId ?? '');
-
-  const {
-    data: playerPerformanceData,
-    isLoading: playerPerformanceLoading,
-    error: playerPerformanceError,
-  } = usePlayerPerformance(platform ?? '', matchId ?? '');
 
   const handleBack = () => {
     router.back();
@@ -153,88 +90,88 @@ export default function MatchAnalysisPage() {
       case 'summary':
         return (
           <MatchSummaryCard
-            summary={summaryData}
-            isLoading={summaryLoading}
-            error={summaryError?.message}
+            platform={platform}
+            matchId={matchId}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'team':
         return (
           <TeamRankCard
-            teamRanks={teamRankData ?? []}
-            isLoading={teamRankLoading}
-            error={teamRankError?.message}
+            platform={platform}
+            matchId={matchId}
             playerName={playerName}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'player':
         return (
           <PlayerStatsCard
-            playerStats={playerStatsData ?? []}
-            isLoading={playerStatsLoading}
-            error={playerStatsError?.message}
+            platform={platform}
+            matchId={matchId}
             playerName={playerName}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'kills':
         return (
           <KillLeaderboardCard
-            killLeaderboard={killLeaderboardData ?? []}
-            isLoading={killLeaderboardLoading}
-            error={killLeaderboardError?.message}
+            platform={platform}
+            matchId={matchId}
             playerName={playerName}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'damage':
         return (
           <DamageLeaderboardCard
-            damageLeaderboard={damageLeaderboardData ?? []}
-            isLoading={damageLeaderboardLoading}
-            error={damageLeaderboardError?.message}
+            platform={platform}
+            matchId={matchId}
             playerName={playerName}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'survival':
         return (
           <SurvivalLeaderboardCard
-            survivalLeaderboard={survivalLeaderboardData ?? []}
-            isLoading={survivalLeaderboardLoading}
-            error={survivalLeaderboardError?.message}
+            platform={platform}
+            matchId={matchId}
             playerName={playerName}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'teamAnalysis':
         return (
           <TeamAnalysisCard
-            teamAnalysis={teamAnalysisData ?? []}
-            isLoading={teamAnalysisLoading}
-            error={teamAnalysisError?.message}
+            platform={platform}
+            matchId={matchId}
             playerName={playerName}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'playerPerformance':
         return (
           <PlayerPerformanceCard
-            playerPerformance={playerPerformanceData ?? []}
-            isLoading={playerPerformanceLoading}
-            error={playerPerformanceError?.message}
+            platform={platform}
+            matchId={matchId}
             playerName={playerName}
+            setIsLoading={setIsLoading}
           />
         );
 
       case 'statistics':
         return (
           <MatchStatisticsCard
-            matchStatistics={matchStatisticsData!}
-            isLoading={matchStatisticsLoading}
-            error={matchStatisticsError?.message}
+            platform={platform}
+            matchId={matchId}
+            setIsLoading={setIsLoading}
           />
         );
       default:
@@ -272,7 +209,7 @@ export default function MatchAnalysisPage() {
               icon={card.icon}
               description={card.description}
               onClick={() => setSelectedCard(card.key)}
-              isLoading={card.key === 'summary' && summaryLoading}
+              isLoading={isLoading}
               hasData={card.key === selectedCard}
             />
           ))}

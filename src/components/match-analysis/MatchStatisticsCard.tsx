@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { MatchStatistics } from '~/models/matchStatistics';
 import { getGameModeDisplayName, getMapDisplayName } from '~/utils/matchUtils';
 import { formatDuration } from '~/utils/dateUtils';
 import { formatDistance, formatTime } from '~/utils/matchUtils';
-
-interface MatchStatisticsCardProps {
-  matchStatistics: MatchStatistics;
-  isLoading?: boolean;
-  error?: string | null;
-}
+import { useMatchStatistics } from './hooks/useMatchStatistics';
 
 export default function MatchStatisticsCard({
-  matchStatistics,
-  isLoading = false,
-  error = null,
-}: MatchStatisticsCardProps) {
+  platform,
+  matchId,
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: matchStatistics,
+    isLoading,
+    error,
+  } = useMatchStatistics(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 매치 통계 데이터가 로드되면 자동으로 표시됨
   };
