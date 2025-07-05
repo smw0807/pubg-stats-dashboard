@@ -1,17 +1,33 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { getGameModeDisplayName, getMapDisplayName } from '~/utils/matchUtils';
 import { formatDuration, formatDate } from '~/utils/dateUtils';
 import AnalysisCard from './AnalysisCard';
 import { formatNumber } from '~/utils/matchUtils';
 import { MatchSummary } from '~/models/summary';
+import { useMatchSummary } from './hooks/useMatchSummary';
+// import { useMatchSummary } from '~/hooks/useMatchSummary';
 
 export default function MatchSummaryCard({
-  summary,
-  isLoading = false,
-  error = null,
-}: MatchSummary) {
-  const winnerTeamId = summary.winner?.attributes?.stats?.teamId;
-  const topKiller = summary.topKiller?.attributes?.stats;
+  platform,
+  matchId,
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: summary,
+    isLoading,
+    error,
+  } = useMatchSummary(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
+  const winnerTeamId = summary?.winner?.attributes?.stats?.teamId;
+  const topKiller = summary?.topKiller?.attributes?.stats;
 
   const handleCardClick = () => {
     // 매치 요약 데이터가 로드되면 자동으로 표시됨

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { TeamAnalysisData } from '~/models/teamAnalysis';
 import {
@@ -6,20 +7,29 @@ import {
   formatDistance,
   formatTime,
 } from '~/utils/matchUtils';
-
-interface TeamAnalysisCardProps {
-  teamAnalysis: TeamAnalysisData;
-  isLoading?: boolean;
-  error?: string | null;
-  playerName: string;
-}
+import { useTeamAnalysis } from './hooks/useTeamAnalysis';
 
 export default function TeamAnalysisCard({
-  teamAnalysis,
-  isLoading = false,
-  error = null,
+  platform,
+  matchId,
   playerName,
-}: TeamAnalysisCardProps) {
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  playerName: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: teamAnalysis,
+    isLoading,
+    error,
+  } = useTeamAnalysis(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 팀 분석 데이터가 로드되면 자동으로 표시됨
   };

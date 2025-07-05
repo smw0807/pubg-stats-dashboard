@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { DamageLeaderboardData } from '~/models/damageLeaderboard';
 import { getRankColor, getRankIcon } from '~/utils/matchUtils';
-
-interface DamageLeaderboardCardProps {
-  damageLeaderboard: DamageLeaderboardData;
-  isLoading?: boolean;
-  error?: string | null;
-  playerName: string;
-}
+import { useDamage } from './hooks/useDamage';
 
 export default function DamageLeaderboardCard({
-  damageLeaderboard,
-  isLoading = false,
-  error = null,
+  platform,
+  matchId,
   playerName,
-}: DamageLeaderboardCardProps) {
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  playerName: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: damageLeaderboard,
+    isLoading,
+    error,
+  } = useDamage(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 데미지 리더보드 데이터가 로드되면 자동으로 표시됨
   };

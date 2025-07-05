@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { SurvivalLeaderboardData } from '~/models/survivalLeaderboard';
 import { getRankColor, getRankIcon, formatTime } from '~/utils/matchUtils';
-
-interface SurvivalLeaderboardCardProps {
-  survivalLeaderboard: SurvivalLeaderboardData;
-  isLoading?: boolean;
-  error?: string | null;
-  playerName: string;
-}
+import { useSurvival } from './hooks/useSurvival';
 
 export default function SurvivalLeaderboardCard({
-  survivalLeaderboard,
-  isLoading = false,
-  error = null,
+  platform,
+  matchId,
   playerName,
-}: SurvivalLeaderboardCardProps) {
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  playerName: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: survivalLeaderboard,
+    isLoading,
+    error,
+  } = useSurvival(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 생존시간 리더보드 데이터가 로드되면 자동으로 표시됨
   };

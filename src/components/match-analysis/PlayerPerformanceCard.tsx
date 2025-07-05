@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { PlayerPerformanceAnalysis } from '~/models/playerPerformance';
 import { formatDuration } from '~/utils/dateUtils';
-
-interface PlayerPerformanceCardProps {
-  playerPerformance: PlayerPerformanceAnalysis[];
-  isLoading?: boolean;
-  error?: string | null;
-  playerName: string;
-}
+import { usePlayerPerformance } from './hooks/usePlayerPerformance';
 
 export default function PlayerPerformanceCard({
-  playerPerformance,
-  isLoading = false,
-  error = null,
+  platform,
+  matchId,
   playerName,
-}: PlayerPerformanceCardProps) {
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  playerName: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: playerPerformance,
+    isLoading,
+    error,
+  } = usePlayerPerformance(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 플레이어 성과 데이터가 로드되면 자동으로 표시됨
   };

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { PlayerStatsData } from '~/models/playerStats';
 import {
@@ -6,20 +7,29 @@ import {
   formatDistance,
   formatTime,
 } from '~/utils/matchUtils';
-
-interface PlayerStatsCardProps {
-  playerStats: PlayerStatsData;
-  isLoading?: boolean;
-  error?: string | null;
-  playerName: string;
-}
+import { usePlayerStats } from './hooks/usePlayerStats';
 
 export default function PlayerStatsCard({
-  playerStats,
-  isLoading = false,
-  error = null,
+  platform,
+  matchId,
   playerName,
-}: PlayerStatsCardProps) {
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  playerName: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: playerStats,
+    isLoading,
+    error,
+  } = usePlayerStats(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 플레이어 통계 데이터가 로드되면 자동으로 표시됨
   };

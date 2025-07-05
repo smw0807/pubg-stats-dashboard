@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { KillLeaderboardData } from '~/models/killLeaderboard';
 import { getRankColor, getRankIcon } from '~/utils/matchUtils';
-
-interface KillLeaderboardCardProps {
-  killLeaderboard: KillLeaderboardData;
-  isLoading?: boolean;
-  error?: string | null;
-  playerName: string;
-}
+import { useKills } from './hooks/useKills';
 
 export default function KillLeaderboardCard({
-  killLeaderboard,
-  isLoading = false,
-  error = null,
+  platform,
+  matchId,
   playerName,
-}: KillLeaderboardCardProps) {
+  setIsLoading,
+}: {
+  platform: string;
+  matchId: string;
+  playerName: string;
+  setIsLoading: (isLoading: boolean) => void;
+}) {
+  const {
+    data: killLeaderboard,
+    isLoading,
+    error,
+  } = useKills(platform ?? '', matchId ?? '');
+
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
+
   const handleCardClick = () => {
     // 킬 리더보드 데이터가 로드되면 자동으로 표시됨
   };
