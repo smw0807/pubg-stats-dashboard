@@ -106,7 +106,7 @@ export const getTierColor = (tier: string) => {
 
 export const getRankColor = (rank: number) => {
   if (rank === 1) return 'text-white bg-yellow-500 dark:bg-yellow-400';
-  if (rank === 2) return 'text-white bg-gray-500 dark:bg-gray-400';
+  if (rank === 2) return 'text-white bg-gray-500 dark:bg-gray-500';
   if (rank === 3) return 'text-white bg-orange-500 dark:bg-orange-400';
   return 'text-white bg-gray-400 dark:bg-gray-500';
 };

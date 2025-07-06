@@ -68,20 +68,16 @@ export default function KillLeaderboardCard({
                     index === 0
                       ? 'border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-600'
                       : index === 1
-                      ? 'border-gray-300 bg-gray-50 dark:bg-gray-700 dark:border-gray-600'
+                      ? 'border-gray-300 bg-gray-50 dark:bg-gray-600 dark:border-gray-400'
                       : 'border-orange-300 bg-orange-50 dark:bg-orange-900/20 dark:border-orange-600'
                   }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-3">
                     <div
-                      className={`flex items-center justify-center w-10 h-10 rounded-full text-white font-bold text-lg ${
-                        index === 0
-                          ? 'bg-yellow-500'
-                          : index === 1
-                          ? 'bg-gray-500 dark:bg-gray-600'
-                          : 'bg-orange-500'
-                      }`}
+                      className={`flex items-center justify-center w-10 h-10 rounded-full text-white font-bold text-lg ${getRankColor(
+                        index + 1
+                      )}`}
                     >
                       {getRankIcon(index + 1)}
                     </div>

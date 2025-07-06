@@ -65,7 +65,7 @@ export default function TeamAnalysisCard({
                     team.won
                       ? 'border-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 dark:border-yellow-600'
                       : index === 1
-                      ? 'border-gray-300 bg-gray-50 dark:bg-gray-700 dark:border-gray-600'
+                      ? 'border-gray-300 bg-gray-50 dark:bg-gray-600 dark:border-gray-400'
                       : 'border-orange-300 bg-orange-50 dark:bg-orange-900/20 dark:border-orange-600'
                   }`}
               >

@@ -6,16 +6,12 @@ export default function ThemeToggle() {
   const { theme, toggleTheme, mounted } = useTheme();
 
   const handleClick = () => {
-    console.log('ThemeToggle clicked, current theme:', theme);
     try {
       toggleTheme();
-      console.log('toggleTheme called successfully');
     } catch (error) {
       console.error('Error in toggleTheme:', error);
     }
   };
-
-  console.log('ThemeToggle render - theme:', theme, 'mounted:', mounted);
 
   if (!mounted) {
     return (

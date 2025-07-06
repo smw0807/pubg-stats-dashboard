@@ -7,12 +7,9 @@ export function useTheme() {
   const { theme, mounted, toggleTheme } = useThemeStore();
 
   useEffect(() => {
-    console.log('useTheme useEffect - initializing theme');
-    // 테마 초기화
+    // 테마 초기화 (이미 초기화된 경우 스킵됨)
     initializeTheme();
   }, []);
-
-  console.log('useTheme hook - theme:', theme, 'mounted:', mounted);
 
   return { theme, toggleTheme, mounted };
 }
