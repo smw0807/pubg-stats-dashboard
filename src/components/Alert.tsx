@@ -34,13 +34,13 @@ export default function Alert({
   const getAlertStyles = () => {
     switch (type) {
       case 'error':
-        return 'bg-red-50 border-red-200 text-red-800';
+        return 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200';
       case 'warning':
-        return 'bg-yellow-50 border-yellow-200 text-yellow-800';
+        return 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200';
       case 'success':
-        return 'bg-green-50 border-green-200 text-green-800';
+        return 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200';
       default:
-        return 'bg-blue-50 border-blue-200 text-blue-800';
+        return 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200';
     }
   };
 
@@ -66,7 +66,7 @@ export default function Alert({
         <span className="flex-1 text-sm font-medium">{message}</span>
         <button
           onClick={onClose}
-          className="ml-3 text-gray-400 hover:text-gray-600 focus:outline-none"
+          className="ml-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"
         >
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path
