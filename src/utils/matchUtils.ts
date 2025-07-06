@@ -79,10 +79,10 @@ export const getMapDisplayName = (mapName: string) => {
 };
 
 export const getPlaceColor = (place: number) => {
-  if (place === 1) return 'text-yellow-600 font-bold';
-  if (place <= 3) return 'text-orange-600 font-semibold';
-  if (place <= 10) return 'text-blue-600 font-medium';
-  return 'text-gray-600';
+  if (place === 1) return 'text-yellow-600 dark:text-yellow-400 font-bold';
+  if (place <= 3) return 'text-orange-600 dark:text-orange-400 font-semibold';
+  if (place <= 10) return 'text-blue-600 dark:text-blue-400 font-medium';
+  return 'text-gray-600 dark:text-gray-400';
 };
 
 export const getTierColor = (tier: string) => {
@@ -105,10 +105,10 @@ export const getTierColor = (tier: string) => {
 };
 
 export const getRankColor = (rank: number) => {
-  if (rank === 1) return 'text-white bg-yellow-500';
-  if (rank === 2) return 'text-white bg-gray-500';
-  if (rank === 3) return 'text-white bg-orange-500';
-  return 'text-white bg-gray-400';
+  if (rank === 1) return 'text-white bg-yellow-500 dark:bg-yellow-400';
+  if (rank === 2) return 'text-white bg-gray-500 dark:bg-gray-500';
+  if (rank === 3) return 'text-white bg-orange-500 dark:bg-orange-400';
+  return 'text-white bg-gray-400 dark:bg-gray-500';
 };
 
 export const getRankIcon = (rank: number) => {

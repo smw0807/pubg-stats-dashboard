@@ -27,7 +27,7 @@ export default function MatchCard({
   return (
     <div
       key={`${match.matchId}-${index}`}
-      className="border border-gray-300 rounded-lg p-4 hover:shadow-md transition-shadow"
+      className="border border-gray-300 dark:border-gray-600 rounded-lg p-4 hover:shadow-md transition-shadow bg-white dark:bg-gray-700"
     >
       <MatchHeader
         gameMode={match.gameMode}
@@ -61,10 +61,10 @@ export default function MatchCard({
       />
 
       {/* 분석 버튼 */}
-      <div className="mt-4 pt-3 border-t border-gray-200">
+      <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-600">
         <button
           onClick={handleAnalyze}
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 shadow-sm hover:shadow-md"
+          className="w-full bg-blue-500 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 shadow-sm hover:shadow-md"
         >
           📊 매치 분석
         </button>

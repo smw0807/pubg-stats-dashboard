@@ -12,6 +12,7 @@ import SurvivalLeaderboardCard from '~/components/match-analysis/SurvivalLeaderb
 import TeamAnalysisCard from '~/components/match-analysis/TeamAnalysisCard';
 import MatchStatisticsCard from '~/components/match-analysis/MatchStatisticsCard';
 import PlayerPerformanceCard from '~/components/match-analysis/PlayerPerformanceCard';
+import ThemeToggle from '~/components/ThemeToggle';
 
 const CARD_LIST = [
   {
@@ -176,7 +177,7 @@ export default function MatchAnalysisPage() {
         );
       default:
         return (
-          <div className="bg-white rounded-lg shadow-lg p-8 text-center text-xl text-blue-700 font-semibold">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center text-xl text-blue-700 dark:text-blue-400 font-semibold">
             &quot;{CARD_LIST.find((c) => c.key === selectedCard)?.title}&quot;
             결과 영역입니다.
           </div>
@@ -185,18 +186,21 @@ export default function MatchAnalysisPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
+      <ThemeToggle />
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={handleBack}
-              className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition duration-200"
+              className="bg-gray-600 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition duration-200"
             >
               ← 뒤로 가기
             </button>
-            <h1 className="text-3xl font-bold text-gray-900">매치 분석</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mr-10">
+              매치 분석
+            </h1>
           </div>
         </div>
 
@@ -218,11 +222,11 @@ export default function MatchAnalysisPage() {
         {/* 결과 영역 */}
         <div className="mt-10 min-h-[200px]">
           {selectedCard ? (
-            <div className="bg-white rounded-lg shadow-lg p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700">
               {renderSelectedCardContent()}
             </div>
           ) : (
-            <div className="text-center text-gray-400 text-lg">
+            <div className="text-center text-gray-400 dark:text-gray-500 text-lg">
               카드를 클릭하면 결과가 여기에 표시됩니다.
             </div>
           )}

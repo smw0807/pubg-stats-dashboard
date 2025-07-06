@@ -37,10 +37,13 @@ export default function PlayerPerformanceCard({
   };
 
   const getWinPlaceColor = (place: number) => {
-    if (place === 1) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-    if (place === 2) return 'text-gray-600 bg-gray-50 border-gray-200';
-    if (place === 3) return 'text-orange-600 bg-orange-50 border-orange-200';
-    return 'text-gray-500 bg-white border-gray-200';
+    if (place === 1)
+      return 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-700';
+    if (place === 2)
+      return 'text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600';
+    if (place === 3)
+      return 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-700';
+    return 'text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600';
   };
 
   const getWinPlaceIcon = (place: number) => {
@@ -58,7 +61,7 @@ export default function PlayerPerformanceCard({
       <div className="space-y-6">
         {/* 상위 플레이어 하이라이트 */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center">
             <span className="mr-2">🏆</span>
             상위 플레이어 성과
           </h3>
@@ -66,7 +69,7 @@ export default function PlayerPerformanceCard({
             {topPlayers.slice(0, 6).map((player) => (
               <div
                 key={player.playerId}
-                className={`rounded-lg p-4 border ${getWinPlaceColor(
+                className={`rounded-lg p-4 border transition-colors duration-200 ${getWinPlaceColor(
                   player.winPlace
                 )}`}
               >
@@ -78,29 +81,31 @@ export default function PlayerPerformanceCard({
                     {player.winPlace}위
                   </span>
                 </div>
-                <div className="font-semibold text-lg mb-1">{player.name}</div>
+                <div className="font-semibold text-lg mb-1 dark:text-gray-200">
+                  {player.name}
+                </div>
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
-                    <span>킬:</span>
-                    <span className="font-medium">
+                    <span className="dark:text-gray-300">킬:</span>
+                    <span className="font-medium dark:text-gray-200">
                       {player.performance.kills}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span>데미지:</span>
-                    <span className="font-medium">
+                    <span className="dark:text-gray-300">데미지:</span>
+                    <span className="font-medium dark:text-gray-200">
                       {Math.round(player.performance.damage)}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span>KDA:</span>
-                    <span className="font-medium">
+                    <span className="dark:text-gray-300">KDA:</span>
+                    <span className="font-medium dark:text-gray-200">
                       {player.performance.kda}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span>생존시간:</span>
-                    <span className="font-medium">
+                    <span className="dark:text-gray-300">생존시간:</span>
+                    <span className="font-medium dark:text-gray-200">
                       {formatDuration(player.efficiency.survivalTime)}
                     </span>
                   </div>
@@ -112,7 +117,7 @@ export default function PlayerPerformanceCard({
 
         {/* 전체 플레이어 목록 */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center">
             <span className="mr-2">📊</span>
             전체 플레이어 성과 분석 ({players.length}명)
           </h3>
@@ -120,10 +125,10 @@ export default function PlayerPerformanceCard({
             {players.map((player) => (
               <div
                 key={player.playerId}
-                className={`bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow ${
+                className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 p-4 hover:shadow-md dark:hover:shadow-lg transition-shadow ${
                   player.name === playerName
-                    ? 'border-red-600 border-2'
-                    : 'border-gray-200'
+                    ? 'border-red-600 dark:border-red-500 border-2'
+                    : 'border-gray-200 dark:border-gray-600'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -136,23 +141,23 @@ export default function PlayerPerformanceCard({
                       {getWinPlaceIcon(player.winPlace)}
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">
+                      <div className="font-semibold text-gray-900 dark:text-gray-100">
                         {player.name === playerName ? (
                           <>{player.name} (나)</>
                         ) : (
                           player.name
                         )}
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
                         #{player.winPlace}위
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold text-blue-600">
+                    <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
                       {player.performance.kda} KDA
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
                       {player.performance.kills}킬 {player.performance.assists}
                       어시스트
                     </div>
@@ -161,26 +166,32 @@ export default function PlayerPerformanceCard({
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                   {/* 전투 성과 */}
-                  <div className="bg-red-50 rounded p-3">
-                    <div className="font-medium text-red-700 mb-1">
+                  <div className="bg-red-50 dark:bg-red-900/20 rounded p-3">
+                    <div className="font-medium text-red-700 dark:text-red-300 mb-1">
                       전투 성과
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">데미지:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          데미지:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {Math.round(player.performance.damage)}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">헤드샷:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          헤드샷:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {player.performance.headshotKills}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">최장킬:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          최장킬:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {formatDistance(player.performance.longestKill)}
                         </span>
                       </div>
@@ -188,20 +199,24 @@ export default function PlayerPerformanceCard({
                   </div>
 
                   {/* 생존 효율 */}
-                  <div className="bg-green-50 rounded p-3">
-                    <div className="font-medium text-green-700 mb-1">
+                  <div className="bg-green-50 dark:bg-green-900/20 rounded p-3">
+                    <div className="font-medium text-green-700 dark:text-green-300 mb-1">
                       생존 효율
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">생존시간:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          생존시간:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {formatDuration(player.efficiency.survivalTime)}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">효율성:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          효율성:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {(player.efficiency.survivalEfficiency * 100).toFixed(
                             0
                           )}
@@ -209,8 +224,10 @@ export default function PlayerPerformanceCard({
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">연속킬:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          연속킬:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {player.efficiency.killStreaks}
                         </span>
                       </div>
@@ -218,26 +235,32 @@ export default function PlayerPerformanceCard({
                   </div>
 
                   {/* 이동 통계 */}
-                  <div className="bg-blue-50 rounded p-3">
-                    <div className="font-medium text-blue-700 mb-1">
+                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded p-3">
+                    <div className="font-medium text-blue-700 dark:text-blue-300 mb-1">
                       이동 통계
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">총 거리:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          총 거리:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {formatDistance(player.movement.totalDistance)}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">도보:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          도보:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {formatDistance(player.movement.walkDistance)}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">차량:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          차량:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {formatDistance(player.movement.rideDistance)}
                         </span>
                       </div>
@@ -245,26 +268,32 @@ export default function PlayerPerformanceCard({
                   </div>
 
                   {/* 아이템 사용 */}
-                  <div className="bg-purple-50 rounded p-3">
-                    <div className="font-medium text-purple-700 mb-1">
+                  <div className="bg-purple-50 dark:bg-purple-900/20 rounded p-3">
+                    <div className="font-medium text-purple-700 dark:text-purple-300 mb-1">
                       아이템 사용
                     </div>
                     <div className="space-y-1">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">부스트:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          부스트:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {player.items.boosts}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">치료:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          치료:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {player.items.heals}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">무기:</span>
-                        <span className="font-medium text-gray-800">
+                        <span className="text-gray-600 dark:text-gray-300">
+                          무기:
+                        </span>
+                        <span className="font-medium text-gray-800 dark:text-gray-200">
                           {player.items.weaponsAcquired}
                         </span>
                       </div>
@@ -273,30 +302,38 @@ export default function PlayerPerformanceCard({
                 </div>
 
                 {/* 추가 통계 */}
-                <div className="mt-3 pt-3 border-t border-gray-200">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-gray-600">
+                <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-gray-600 dark:text-gray-300">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">부활:</span>
-                      <span className="font-medium text-gray-800">
+                      <span className="text-gray-600 dark:text-gray-300">
+                        부활:
+                      </span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
                         {player.efficiency.revives}회
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">다운:</span>
-                      <span className="font-medium text-gray-800">
+                      <span className="text-gray-600 dark:text-gray-300">
+                        다운:
+                      </span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
                         {player.efficiency.DBNOs}회
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">헤드샷률:</span>
-                      <span className="font-medium text-gray-800">
+                      <span className="text-gray-600 dark:text-gray-300">
+                        헤드샷률:
+                      </span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
                         {(player.performance.headshotAccuracy * 100).toFixed(0)}
                         %
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">차량파괴:</span>
-                      <span className="font-medium text-gray-800">
+                      <span className="text-gray-600 dark:text-gray-300">
+                        차량파괴:
+                      </span>
+                      <span className="font-medium text-gray-800 dark:text-gray-200">
                         {player.items.vehicleDestroys}대
                       </span>
                     </div>
@@ -309,17 +346,21 @@ export default function PlayerPerformanceCard({
 
         {/* 통계 요약 */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 flex items-center">
             <span className="mr-2">📈</span>
             성과 통계 요약
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <h4 className="font-semibold text-gray-800 mb-3">전투 통계</h4>
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                전투 통계
+              </h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 KDA:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 KDA:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {(
                       players.reduce((sum, p) => sum + p.performance.kda, 0) /
                       players.length
@@ -327,8 +368,10 @@ export default function PlayerPerformanceCard({
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 데미지:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 데미지:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {Math.round(
                       players.reduce(
                         (sum, p) => sum + p.performance.damage,
@@ -338,8 +381,10 @@ export default function PlayerPerformanceCard({
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 킬:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 킬:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {(
                       players.reduce((sum, p) => sum + p.performance.kills, 0) /
                       players.length
@@ -348,12 +393,16 @@ export default function PlayerPerformanceCard({
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <h4 className="font-semibold text-gray-800 mb-3">생존 통계</h4>
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                생존 통계
+              </h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 생존시간:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 생존시간:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {formatDuration(
                       Math.round(
                         players.reduce(
@@ -365,8 +414,10 @@ export default function PlayerPerformanceCard({
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 생존효율:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 생존효율:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {(
                       (players.reduce(
                         (sum, p) => sum + p.efficiency.survivalEfficiency,
@@ -379,20 +430,26 @@ export default function PlayerPerformanceCard({
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">총 부활:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    총 부활:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {players.reduce((sum, p) => sum + p.efficiency.revives, 0)}
                     회
                   </span>
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <h4 className="font-semibold text-gray-800 mb-3">이동 통계</h4>
+            <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                이동 통계
+              </h4>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 이동거리:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 이동거리:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {formatDistance(
                       players.reduce(
                         (sum, p) => sum + p.movement.totalDistance,
@@ -402,8 +459,10 @@ export default function PlayerPerformanceCard({
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 도보거리:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 도보거리:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {formatDistance(
                       players.reduce(
                         (sum, p) => sum + p.movement.walkDistance,
@@ -413,8 +472,10 @@ export default function PlayerPerformanceCard({
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">평균 차량거리:</span>
-                  <span className="font-semibold text-gray-800">
+                  <span className="text-gray-600 dark:text-gray-300">
+                    평균 차량거리:
+                  </span>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">
                     {formatDistance(
                       players.reduce(
                         (sum, p) => sum + p.movement.rideDistance,
@@ -442,7 +503,7 @@ export default function PlayerPerformanceCard({
     >
       {error ? (
         <div className="text-center py-8">
-          <p className="text-red-500">
+          <p className="text-red-500 dark:text-red-400">
             플레이어 성과 분석 정보를 불러오는 중 오류가 발생했습니다.
           </p>
         </div>

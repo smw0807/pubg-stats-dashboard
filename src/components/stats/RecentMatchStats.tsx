@@ -30,8 +30,10 @@ export default function RecentMatchStats({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-4">최근 매치</h2>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+      <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+        최근 매치
+      </h2>
       <div className="space-y-4">
         {recentMatches.map((match, index) => {
           if (!match) return null;
