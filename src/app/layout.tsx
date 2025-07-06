@@ -104,15 +104,14 @@ export default function RootLayout({
                 try {
                   var theme = localStorage.getItem('pubg-stats-dashboard.theme');
                   var isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                  console.log('theme-init', theme, isDark);
                   if (isDark) {
                     document.documentElement.classList.add('dark');
                   } else {
                     document.documentElement.classList.remove('dark');
                   }
                 } catch (e) {
-                  // localStorage 접근 실패 시 기본값 사용
-                  document.documentElement.classList.remove('dark');
+                  // localStorage 접근 실패 시 기본값 사용 (다크모드)
+                  document.documentElement.classList.add('dark');
                 }
               })();
             `,

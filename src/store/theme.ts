@@ -14,7 +14,7 @@ interface ThemeStore {
 const getInitialTheme = (): Theme => {
   // 서버 사이드에서는 기본값 반환
   if (typeof window === 'undefined') {
-    return 'light';
+    return 'dark';
   }
 
   const savedTheme = localStorage.getItem(
@@ -33,7 +33,7 @@ const getInitialTheme = (): Theme => {
 };
 
 export const useThemeStore = create<ThemeStore>((set, get) => ({
-  theme: 'light', // 서버와 클라이언트 간 일관성을 위해 기본값 사용
+  theme: 'dark', // 서버와 클라이언트 간 일관성을 위해 기본값을 다크모드로 설정
   mounted: false,
   toggleTheme: () => {
     const { theme } = get();
