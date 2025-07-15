@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { usePlayerRankStats } from '~/components/stats/hooks/usePlayerStats';
 import PlayerStats from '~/components/stats/PlayerStats';
 import RecentMatchStats from '~/components/stats/RecentMatchStats';
@@ -8,7 +8,6 @@ import ThemeToggle from '~/components/ThemeToggle';
 
 export default function PlayerPage() {
   const params = useParams();
-  const router = useRouter();
   const platform = params.platform as string;
   const playerName = params.playerName as string;
 
@@ -17,10 +16,6 @@ export default function PlayerPage() {
     isLoading: rankStatsLoading,
     error: rankStatsError,
   } = usePlayerRankStats(platform, playerName);
-
-  const handleNewSearch = () => {
-    router.push('/');
-  };
 
   if (rankStatsLoading) {
     return (
@@ -89,7 +84,6 @@ export default function PlayerPage() {
             playerName={playerName}
             platform={platform}
             stats={rankStats}
-            onNewSearch={handleNewSearch}
           />
         )}
       </div>

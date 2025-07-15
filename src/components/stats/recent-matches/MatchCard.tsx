@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import type { RecentMatch } from '~/models/recentMatches';
 import MatchHeader from './MatchHeader';
