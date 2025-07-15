@@ -1,5 +1,4 @@
-'use client';
-
+import Link from 'next/link';
 import type { RankedGameModeStats } from '~/models/playerStats';
 import GameModeStats from './GameModeStats';
 import {
@@ -12,14 +11,12 @@ interface PlayerStatsProps {
   playerName: string;
   platform: string;
   stats: RankedGameModeStats;
-  onNewSearch: () => void;
 }
 
 export default function PlayerStats({
   playerName,
   platform,
   stats,
-  onNewSearch,
 }: PlayerStatsProps) {
   const banTypeName = () => {
     switch (stats.banType) {
@@ -49,12 +46,11 @@ export default function PlayerStats({
             플랫폼: {platform === 'steam' ? '스팀' : '카카오'}
           </p>
 
-          <button
-            onClick={onNewSearch}
-            className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 shadow-lg"
-          >
-            새로운 검색
-          </button>
+          <Link href="/">
+            <button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 shadow-lg">
+              새로운 검색
+            </button>
+          </Link>
         </div>
 
         {/* 게임 모드 탭 */}
