@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
-import PlayerSearch from '../components/PlayerSearch';
-import ThemeToggle from '../components/ThemeToggle';
-import Image from 'next/image';
+import PlayerSearch from '~/components/PlayerSearch';
+import ThemeToggle from '~/components/ThemeToggle';
+import LargeInfo from '~/components/main-info/LargeInfo';
+import SmallInfo from '~/components/main-info/SmallInfo';
 
 export const metadata: Metadata = {
   title: 'PUBG 전적 분석 대시보드 - 배틀그라운드 통계 검색',
@@ -53,125 +54,53 @@ export default function Home() {
           </h2>
 
           {/* Recent Matches Feature */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="order-2 md:order-1 relative">
-                <Image
-                  src="/img/3.png"
-                  alt="최근 매치 화면"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-md"
-                />
-              </div>
-              <div className="order-1 md:order-2">
-                <h3 className="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                  최근 매치 히스토리
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  최근 플레이한 매치들의 기본 정보를 확인할 수 있습니다. 매치
-                  결과, 킬 수, 순위 등 핵심 정보를 한눈에 파악하세요.
-                </p>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>• 최근 매치 목록</li>
-                  <li>• 매치 결과 요약</li>
-                  <li>• 기본 성과 지표</li>
-                  <li>• 매치 상세 분석 링크</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <LargeInfo
+            title="최근 매치 히스토리"
+            description="최그라운드 플레이한 매치들의 기본 정보를 확인할 수 있습니다. 매치 결과, 킬 수, 순위 등 핵심 정보를 한눈에 파악하세요."
+            summary={[
+              '최근 매치 목록',
+              '매치 결과 요약',
+              '기본 성과 지표',
+              '매치 상세 분석 링크',
+            ]}
+            imageUrl="/img/3.png"
+          />
 
           {/* Match Analysis Feature */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                  매치 상세 분석
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  선택한 매치의 상세한 분석 정보를 제공합니다. 팀 성과, 데미지,
-                  킬 등 매치의 모든 측면을 분석해보세요.
-                </p>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>• 매치별 상세 통계</li>
-                  <li>• 팀 기여도 분석</li>
-                  <li>• 데미지 및 킬 리더보드</li>
-                  <li>• 매치 통계</li>
-                </ul>
-              </div>
-              <div className="relative">
-                <Image
-                  src="/img/4.png"
-                  alt="매치 분석 화면"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-md"
-                />
-              </div>
-            </div>
-          </div>
+          <LargeInfo
+            title="매치 상세 분석"
+            description="선택한 매치의 상세한 분석 정보를 제공합니다. 팀 성과, 데미지, 킬 등 매치의 모든 측면을 분석해보세요."
+            summary={[
+              '매치별 상세 통계',
+              '팀 기여도 분석',
+              '데미지 및 킬 리더보드',
+              '매치 통계',
+            ]}
+            imageUrl="/img/4.png"
+            imagePosition="right"
+          />
 
           {/* Player Stats Feature */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="order-1 md:order-2">
-                <h3 className="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                  플레이어 통계 분석
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  플레이어의 기본 게임 통계를 확인할 수 있습니다. 매치에서
-                  달성한 데미지, 생존 시간, 킬 어시스트 등 다양한 지표를
-                  제공합니다.
-                </p>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>• 성과</li>
-                  <li>• 생존 시간</li>
-                  <li>• 아이템 사용</li>
-                  <li>• 이동거리</li>
-                </ul>
-              </div>
-              <div className="relative">
-                <Image
-                  src="/img/7.png"
-                  alt="플레이어 통계 화면"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-md"
-                />
-              </div>
-            </div>
-          </div>
+          <LargeInfo
+            title="플레이어 통계 분석"
+            description="플레이어의 기본 게임 통계를 확인할 수 있습니다. 매치에서 달성한 데미지, 생존 시간, 킬 어시스트 등 다양한 지표를 제공합니다."
+            summary={['성과', '생존 시간', '아이템 사용', '이동거리']}
+            imageUrl="/img/7.png"
+          />
 
           {/* Team Analysis Feature */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                  팀 분석
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-6">
-                  매치 내 각 팀별로 성과를 분석할 수 있습니다. 팀 내 순위 비교,
-                  팀내 최고 성과자 비교 등 팀 성과를 확인할 수 있습니다.
-                </p>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>• 팀 달성 킬, 데미지</li>
-                  <li>• 팀 효율성 지표</li>
-                  <li>• 팀 내 최고 성과자 비교</li>
-                  <li>• 팀 내 순위 비교</li>
-                </ul>
-              </div>
-              <div className="relative">
-                <Image
-                  src="/img/11.png"
-                  alt="팀 분석 화면"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-md"
-                />
-              </div>
-            </div>
-          </div>
+          <LargeInfo
+            title="팀 분석"
+            description="매치 내 각 팀별로 성과를 분석할 수 있습니다. 팀 내 순위 비교, 팀내 최고 성과자 비교 등 팀 성과를 확인할 수 있습니다."
+            summary={[
+              '팀 달성 킬, 데미지',
+              '팀 효율성 지표',
+              '팀 내 최고 성과자 비교',
+              '팀 내 순위 비교',
+            ]}
+            imageUrl="/img/11.png"
+            imagePosition="right"
+          />
         </div>
 
         {/* Additional Features Grid */}
@@ -180,113 +109,41 @@ export default function Home() {
             분석 기능들
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div className="relative mb-4">
-                <Image
-                  src="/img/5.png"
-                  alt="데미지 분석"
-                  width={400}
-                  height={250}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                매치 요약
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                해당 매치에 대한 요약 정보를 확인할 수 있습니다.
-              </p>
-            </div>
+            <SmallInfo
+              title="매치 요약"
+              description="해당 매치에 대한 요약 정보를 확인할 수 있습니다."
+              imageUrl="/img/5.png"
+            />
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div className="relative mb-4">
-                <Image
-                  src="/img/6.png"
-                  alt="킬 분석"
-                  width={400}
-                  height={250}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                킬 리더보드
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                매치에서 가장 많은 킬을 기록한 플레이어들을 확인할 수 있습니다.
-              </p>
-            </div>
+            <SmallInfo
+              title="킬 분석"
+              description="해매치에서 가장 많은 킬을 기록한 플레이어들을 확인할 수 있습니다."
+              imageUrl="/img/6.png"
+            />
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div className="relative mb-4">
-                <Image
-                  src="/img/8.png"
-                  alt="생존 분석"
-                  width={400}
-                  height={250}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                생존 리더보드
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                가장 오래 생존한 플레이어들을 확인할 수 있습니다.
-              </p>
-            </div>
+            <SmallInfo
+              title="생존 리더보드"
+              description="가장 오래 생존한 플레이어들을 확인할 수 있습니다."
+              imageUrl="/img/8.png"
+            />
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div className="relative mb-4">
-                <Image
-                  src="/img/9.png"
-                  alt="데미지 분석"
-                  width={400}
-                  height={250}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                데미지 리더보드
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                가장 많은 데미지를 입힌 플레이어들을 확인할 수 있습니다.
-              </p>
-            </div>
+            <SmallInfo
+              title="데미지 리더보드"
+              description="가장 많은 데미지를 입힌 플레이어들을 확인할 수 있습니다."
+              imageUrl="/img/9.png"
+            />
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div className="relative mb-4">
-                <Image
-                  src="/img/10.png"
-                  alt="팀 순위"
-                  width={400}
-                  height={250}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                팀 순위
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                매치에서 각 팀의 최종 순위를 확인할 수 있습니다.
-              </p>
-            </div>
+            <SmallInfo
+              title="팀 순위"
+              description="매치에서 각 팀의 최종 순위를 확인할 수 있습니다."
+              imageUrl="/img/10.png"
+            />
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div className="relative mb-4">
-                <Image
-                  src="/img/12.png"
-                  alt="플레이어 성과"
-                  width={400}
-                  height={250}
-                  className="rounded-lg"
-                />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
-                플레이어 성과
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                개별 플레이어의 상세한 성과 정보를 확인할 수 있습니다.
-              </p>
-            </div>
+            <SmallInfo
+              title="플레이어 성과"
+              description="개별 플레이어의 상세한 성과 정보를 확인할 수 있습니다."
+              imageUrl="/img/12.png"
+            />
           </div>
         </div>
 
