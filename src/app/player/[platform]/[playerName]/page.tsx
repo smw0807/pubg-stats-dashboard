@@ -4,12 +4,10 @@ import { useParams } from 'next/navigation';
 import { usePlayerRankStats } from '~/components/stats/hooks/usePlayerStats';
 import PlayerStats from '~/components/stats/PlayerStats';
 import RecentMatchStats from '~/components/stats/RecentMatchStats';
-import ThemeToggle from '~/components/ThemeToggle';
 
 function RankStatsLoading() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-      <ThemeToggle />
       <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
         <p className="text-gray-600 dark:text-gray-300">
@@ -23,7 +21,6 @@ function RankStatsLoading() {
 function RankStatsError({ message }: { message: string }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-      <ThemeToggle />
       <div className="text-center">
         <h1 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">
           오류 발생
@@ -43,7 +40,6 @@ function RankStatsError({ message }: { message: string }) {
 function NotFoundPlayer() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-      <ThemeToggle />
       <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
           플레이어 정보 없음
@@ -87,7 +83,6 @@ export default function PlayerPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <ThemeToggle />
       <div>
         {rankStats && (
           <PlayerStats

@@ -3,6 +3,7 @@ import './globals.css';
 import { Metadata } from 'next';
 import Script from 'next/script';
 import Providers from '~/components/Providers';
+import ThemeToggle from '~/components/ThemeToggle';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -122,7 +123,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <ThemeToggle />
+          {children}
+        </Providers>
         <Script
           id="structured-data"
           type="application/ld+json"

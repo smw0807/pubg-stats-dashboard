@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import PlayerSearch from '~/components/PlayerSearch';
-import ThemeToggle from '~/components/ThemeToggle';
 import LargeInfo from '~/components/main-info/LargeInfo';
 import SmallInfo from '~/components/main-info/SmallInfo';
 
@@ -39,7 +38,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
-      <ThemeToggle />
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-12">
         {/* Search Section */}
