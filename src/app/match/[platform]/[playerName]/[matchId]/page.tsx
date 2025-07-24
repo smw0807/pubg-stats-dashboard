@@ -12,7 +12,6 @@ import SurvivalLeaderboardCard from '~/components/match-analysis/SurvivalLeaderb
 import TeamAnalysisCard from '~/components/match-analysis/TeamAnalysisCard';
 import MatchStatisticsCard from '~/components/match-analysis/MatchStatisticsCard';
 import PlayerPerformanceCard from '~/components/match-analysis/PlayerPerformanceCard';
-import ThemeToggle from '~/components/ThemeToggle';
 
 const CARD_LIST = [
   {
@@ -187,7 +186,6 @@ export default function MatchAnalysisPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
-      <ThemeToggle />
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
         <div className="mb-8">
