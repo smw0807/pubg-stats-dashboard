@@ -1,5 +1,5 @@
+'use client';
 import Link from 'next/link';
-import type { RankedGameModeStats } from '~/models/playerStats';
 import GameModeStats from './GameModeStats';
 import StatCard from './card/StatCard';
 import {
@@ -7,11 +7,12 @@ import {
   formatPercentage,
   getTierColor,
 } from '~/utils/matchUtils';
+import { usePlayerRankStats } from './hooks/usePlayerStats';
+import ErrorCard from './card/ErrorCard';
 
 interface PlayerStatsProps {
   playerName: string;
   platform: string;
-  stats: RankedGameModeStats;
 }
 
 function HeaderComponent({
@@ -60,8 +61,39 @@ function HeaderComponent({
 export default function PlayerStats({
   playerName,
   platform,
-  stats,
 }: PlayerStatsProps) {
+  const {
+    data: rankStats,
+    isLoading: rankStatsLoading,
+    error: rankStatsError,
+  } = usePlayerRankStats(platform, playerName);
+
+  if (rankStatsLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">
+            플레이어 정보를 불러오는 중...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (rankStatsError) {
+    return <ErrorCard title="오류 발생" message={rankStatsError?.message} />;
+  }
+
+  if (!rankStats) {
+    return (
+      <ErrorCard
+        title="플레이어 정보 없음"
+        message="해당 플레이어의 정보를 찾을 수 없습니다."
+      />
+    );
+  }
+
   return (
     <div className="p-4">
       <div className="max-w-7xl mx-auto">
@@ -69,46 +101,46 @@ export default function PlayerStats({
         <HeaderComponent
           playerName={playerName}
           platform={platform}
-          banType={stats.banType}
+          banType={rankStats.banType}
         />
 
         {/* 게임 모드 탭 */}
         <div className="mb-8">
           <div className="flex justify-center space-x-4">
-            {stats.all && (
+            {rankStats.all && (
               <StatCard title="랭크">
                 <GameModeStats
-                  stats={stats.all}
+                  stats={rankStats.all}
                   getTierColor={getTierColor}
                   formatNumber={formatNumber}
                   formatPercentage={formatPercentage}
                 />
               </StatCard>
             )}
-            {stats.duo && (
+            {rankStats.duo && (
               <StatCard title="듀오">
                 <GameModeStats
-                  stats={stats.duo}
+                  stats={rankStats.duo}
                   getTierColor={getTierColor}
                   formatNumber={formatNumber}
                   formatPercentage={formatPercentage}
                 />
               </StatCard>
             )}
-            {stats.squad && (
+            {rankStats.squad && (
               <StatCard title="스쿼드">
                 <GameModeStats
-                  stats={stats.squad}
+                  stats={rankStats.squad}
                   getTierColor={getTierColor}
                   formatNumber={formatNumber}
                   formatPercentage={formatPercentage}
                 />
               </StatCard>
             )}
-            {stats['squad-fpp'] && platform === 'steam' && (
+            {rankStats['squad-fpp'] && platform === 'steam' && (
               <StatCard title="스쿼드 FPP">
                 <GameModeStats
-                  stats={stats['squad-fpp']}
+                  stats={rankStats['squad-fpp']}
                   getTierColor={getTierColor}
                   formatNumber={formatNumber}
                   formatPercentage={formatPercentage}
