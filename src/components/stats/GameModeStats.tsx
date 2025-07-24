@@ -7,7 +7,7 @@ interface GameModeStatsProps {
   formatPercentage: (num: number) => string;
 }
 
-function GameModeStats({
+export default function GameModeStats({
   stats,
   getTierColor,
   formatNumber,
@@ -113,5 +113,3 @@ function GameModeStats({
     </div>
   );
 }
-
-export default GameModeStats;
