@@ -3,6 +3,7 @@ import AnalysisCard from './AnalysisCard';
 import { SurvivalLeaderboardData } from '~/models/survivalLeaderboard';
 import { getRankColor, getRankIcon, formatTime } from '~/utils/matchUtils';
 import { useSurvival } from './hooks/useSurvival';
+import PlayerNameClick from './PlayerNameClick';
 
 export default function SurvivalLeaderboardCard({
   platform,
@@ -79,7 +80,11 @@ export default function SurvivalLeaderboardCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 dark:text-gray-200">
-                        {player.name}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={player.name}
+                          isMine={player.name === playerName}
+                        />
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
                         최종 순위: {player.winPlace}위
@@ -144,11 +149,11 @@ export default function SurvivalLeaderboardCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 dark:text-gray-200">
-                        {player.name === playerName ? (
-                          <>{player.name} (나)</>
-                        ) : (
-                          player.name
-                        )}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={player.name}
+                          isMine={player.name === playerName}
+                        />
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
                         최종 순위: {player.winPlace}위

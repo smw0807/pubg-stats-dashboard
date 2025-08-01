@@ -8,6 +8,7 @@ import {
   formatTime,
 } from '~/utils/matchUtils';
 import { usePlayerStats } from './hooks/usePlayerStats';
+import PlayerNameClick from './PlayerNameClick';
 
 export default function PlayerStatsCard({
   platform,
@@ -86,7 +87,11 @@ export default function PlayerStatsCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 dark:text-gray-200">
-                        {player.name}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={player.name}
+                          isMine={player.name === playerName}
+                        />
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
                         {player.kills}킬 {player.assists}어시스트
@@ -145,11 +150,11 @@ export default function PlayerStatsCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 dark:text-gray-200">
-                        {player.name === playerName ? (
-                          <>{player.name} (나)</>
-                        ) : (
-                          player.name
-                        )}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={player.name}
+                          isMine={player.name === playerName}
+                        />
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
                         킬: {player.kills} | 어시스트: {player.assists} |

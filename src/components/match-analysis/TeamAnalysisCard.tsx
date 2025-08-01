@@ -8,6 +8,7 @@ import {
   formatTime,
 } from '~/utils/matchUtils';
 import { useTeamAnalysis } from './hooks/useTeamAnalysis';
+import PlayerNameClick from './PlayerNameClick';
 
 export default function TeamAnalysisCard({
   platform,
@@ -258,7 +259,13 @@ export default function TeamAnalysisCard({
                         🔫 최고 킬러
                       </div>
                       <div className="font-semibold text-gray-800 dark:text-gray-200">
-                        {team.topPerformers.topKiller.name}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={team.topPerformers.topKiller.name}
+                          isMine={
+                            team.topPerformers.topKiller.name === playerName
+                          }
+                        />
                       </div>
                       <div className="text-gray-600 dark:text-gray-300">
                         {team.topPerformers.topKiller.kills}킬 |{' '}
@@ -271,7 +278,13 @@ export default function TeamAnalysisCard({
                         💥 최고 데미지
                       </div>
                       <div className="font-semibold text-gray-800 dark:text-gray-200">
-                        {team.topPerformers.topDamage.name}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={team.topPerformers.topDamage.name}
+                          isMine={
+                            team.topPerformers.topDamage.name === playerName
+                          }
+                        />
                       </div>
                       <div className="text-gray-600 dark:text-gray-300">
                         {Math.round(team.topPerformers.topDamage.damage || 0)}
@@ -283,7 +296,13 @@ export default function TeamAnalysisCard({
                         ⏱️ 최고 생존자
                       </div>
                       <div className="font-semibold text-gray-800 dark:text-gray-200">
-                        {team.topPerformers.topSurvivor.name}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={team.topPerformers.topSurvivor.name}
+                          isMine={
+                            team.topPerformers.topSurvivor.name === playerName
+                          }
+                        />
                       </div>
                       <div className="text-gray-600 dark:text-gray-300">
                         {formatTime(
