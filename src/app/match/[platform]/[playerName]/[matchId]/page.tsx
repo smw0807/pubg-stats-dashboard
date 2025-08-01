@@ -89,6 +89,7 @@ export default function MatchAnalysisPage() {
     switch (selectedCard) {
       case 'summary':
         return (
+          // 매치 요약 정보
           <MatchSummaryCard
             platform={platform}
             matchId={matchId}
@@ -98,6 +99,7 @@ export default function MatchAnalysisPage() {
 
       case 'team':
         return (
+          // 팀 순위
           <TeamRankCard
             platform={platform}
             matchId={matchId}
@@ -108,6 +110,7 @@ export default function MatchAnalysisPage() {
 
       case 'player':
         return (
+          // 플레이어 통계
           <PlayerStatsCard
             platform={platform}
             matchId={matchId}
@@ -118,6 +121,7 @@ export default function MatchAnalysisPage() {
 
       case 'kills':
         return (
+          // 킬 리더보드
           <KillLeaderboardCard
             platform={platform}
             matchId={matchId}
@@ -128,6 +132,7 @@ export default function MatchAnalysisPage() {
 
       case 'damage':
         return (
+          // 데미지 리더보드
           <DamageLeaderboardCard
             platform={platform}
             matchId={matchId}
@@ -138,6 +143,7 @@ export default function MatchAnalysisPage() {
 
       case 'survival':
         return (
+          // 생존 시간 리더보드
           <SurvivalLeaderboardCard
             platform={platform}
             matchId={matchId}
@@ -148,6 +154,7 @@ export default function MatchAnalysisPage() {
 
       case 'teamAnalysis':
         return (
+          // 팀 분석
           <TeamAnalysisCard
             platform={platform}
             matchId={matchId}
@@ -158,6 +165,7 @@ export default function MatchAnalysisPage() {
 
       case 'playerPerformance':
         return (
+          // 플레이어 성과 분석
           <PlayerPerformanceCard
             platform={platform}
             matchId={matchId}
@@ -168,6 +176,7 @@ export default function MatchAnalysisPage() {
 
       case 'statistics':
         return (
+          // 매치 통계
           <MatchStatisticsCard
             platform={platform}
             matchId={matchId}

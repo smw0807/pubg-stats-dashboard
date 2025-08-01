@@ -3,6 +3,7 @@ import AnalysisCard from './AnalysisCard';
 import { TeamRankData } from '~/models/teamRank';
 import { formatDistance, formatTime } from '~/utils/matchUtils';
 import { useTeamRank } from './hooks/useTeamRank';
+import PlayerNameClick from './PlayerNameClick';
 
 export default function TeamRankCard({
   platform,
@@ -122,11 +123,11 @@ export default function TeamRankCard({
                 >
                   <div className="flex items-center space-x-2">
                     <span className="font-medium text-gray-800 dark:text-gray-200">
-                      {participant.name === playerName ? (
-                        <>{participant.name} (나)</>
-                      ) : (
-                        participant.name
-                      )}
+                      <PlayerNameClick
+                        platform={platform}
+                        playerName={participant.name}
+                        isMine={participant.name === playerName}
+                      />
                     </span>
                   </div>
                   <div className="flex items-center space-x-4 text-gray-600 dark:text-gray-300">

@@ -3,6 +3,7 @@ import AnalysisCard from './AnalysisCard';
 import { KillLeaderboardData } from '~/models/killLeaderboard';
 import { getRankColor, getRankIcon } from '~/utils/matchUtils';
 import { useKills } from './hooks/useKills';
+import PlayerNameClick from './PlayerNameClick';
 
 export default function KillLeaderboardCard({
   platform,
@@ -83,7 +84,11 @@ export default function KillLeaderboardCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 dark:text-gray-200">
-                        {player.name}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={player.name}
+                          isMine={player.name === playerName}
+                        />
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
                         최종 순위: {player.winPlace}위
@@ -149,11 +154,11 @@ export default function KillLeaderboardCard({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800 dark:text-gray-200">
-                        {player.name === playerName ? (
-                          <>{player.name} (나)</>
-                        ) : (
-                          player.name
-                        )}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={player.name}
+                          isMine={player.name === playerName}
+                        />
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
                         최종 순위: {player.winPlace}위

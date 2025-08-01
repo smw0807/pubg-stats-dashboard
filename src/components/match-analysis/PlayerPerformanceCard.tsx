@@ -3,6 +3,7 @@ import AnalysisCard from './AnalysisCard';
 import { PlayerPerformanceAnalysis } from '~/models/playerPerformance';
 import { formatDuration } from '~/utils/dateUtils';
 import { usePlayerPerformance } from './hooks/usePlayerPerformance';
+import PlayerNameClick from './PlayerNameClick';
 
 export default function PlayerPerformanceCard({
   platform,
@@ -82,7 +83,11 @@ export default function PlayerPerformanceCard({
                   </span>
                 </div>
                 <div className="font-semibold text-lg mb-1 dark:text-gray-200">
-                  {player.name}
+                  <PlayerNameClick
+                    platform={platform}
+                    playerName={player.name}
+                    isMine={player.name === playerName}
+                  />
                 </div>
                 <div className="space-y-1 text-sm">
                   <div className="flex justify-between">
@@ -142,11 +147,11 @@ export default function PlayerPerformanceCard({
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900 dark:text-gray-100">
-                        {player.name === playerName ? (
-                          <>{player.name} (나)</>
-                        ) : (
-                          player.name
-                        )}
+                        <PlayerNameClick
+                          platform={platform}
+                          playerName={player.name}
+                          isMine={player.name === playerName}
+                        />
                       </div>
                       <div className="text-sm text-gray-500 dark:text-gray-400">
                         #{player.winPlace}위
