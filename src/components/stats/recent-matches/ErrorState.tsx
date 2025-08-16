@@ -1,5 +1,5 @@
 interface ErrorStateProps {
-  error: Error;
+  error: string;
 }
 
 export default function ErrorState({ error }: ErrorStateProps) {
@@ -12,9 +12,7 @@ export default function ErrorState({ error }: ErrorStateProps) {
         <p className="text-red-600 dark:text-red-400 mb-2">
           최근 매치 정보를 불러올 수 없습니다.
         </p>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
-          {error.message}
-        </p>
+        <p className="text-gray-500 dark:text-gray-400 text-sm">{error}</p>
       </div>
     </div>
   );

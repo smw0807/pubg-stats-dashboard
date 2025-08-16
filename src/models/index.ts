@@ -28,3 +28,8 @@ export type {
   PlayerMovement,
   PlayerItems,
 } from './playerPerformance';
+
+export interface ErrorResponse {
+  statusCode: number;
+  message: string;
+}

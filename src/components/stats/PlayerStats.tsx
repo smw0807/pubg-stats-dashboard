@@ -1,14 +1,13 @@
-'use client';
 import Link from 'next/link';
 import GameModeStats from './GameModeStats';
 import StatCard from './card/StatCard';
+import ErrorCard from './card/ErrorCard';
 import {
   formatNumber,
   formatPercentage,
   getTierColor,
 } from '~/utils/matchUtils';
-import { usePlayerRankStats } from './hooks/usePlayerStats';
-import ErrorCard from './card/ErrorCard';
+import { fetchPlayerRankStats } from './hooks/usePlayerStats';
 
 interface PlayerStatsProps {
   playerName: string;
@@ -58,34 +57,23 @@ function HeaderComponent({
   );
 }
 
-export default function PlayerStats({
+export default async function PlayerStats({
   playerName,
   platform,
 }: PlayerStatsProps) {
-  const {
-    data: rankStats,
-    isLoading: rankStatsLoading,
-    error: rankStatsError,
-  } = usePlayerRankStats(platform, playerName);
+  const rankStats = await fetchPlayerRankStats({ platform, playerName });
 
-  if (rankStatsLoading) {
+  if (rankStats && 'statusCode' in rankStats) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 dark:border-blue-400 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">
-            플레이어 정보를 불러오는 중...
-          </p>
-        </div>
-      </div>
+      <ErrorCard
+        title="플레이어 정보 없음"
+        message="해당 플레이어의 정보를 찾을 수 없습니다."
+      />
     );
   }
 
-  if (rankStatsError) {
-    return <ErrorCard title="오류 발생" message={rankStatsError?.message} />;
-  }
-
-  if (!rankStats) {
+  // 타입 가드: rankStats가 유효한 데이터인지 확인
+  if (!rankStats || 'statusCode' in rankStats) {
     return (
       <ErrorCard
         title="플레이어 정보 없음"

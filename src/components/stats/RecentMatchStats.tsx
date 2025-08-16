@@ -1,28 +1,16 @@
-'use client';
-
-import { useRecentMatchStats } from './hooks/useRecentMatchStats';
-import LoadingState from './recent-matches/LoadingState';
+import { fetchRecentMatchStats } from './hooks/useRecentMatchStats';
 import ErrorState from './recent-matches/ErrorState';
 import EmptyState from './recent-matches/EmptyState';
 import MatchCard from './recent-matches/MatchCard';
 import { SearchParams } from '~/models';
 
-export default function RecentMatchStats({
+export default async function RecentMatchStats({
   platform,
   playerName,
 }: SearchParams) {
-  const {
-    data: recentMatches,
-    isLoading,
-    error,
-  } = useRecentMatchStats(platform, playerName);
-
-  if (isLoading) {
-    return <LoadingState />;
-  }
-
-  if (error) {
-    return <ErrorState error={error} />;
+  const recentMatches = await fetchRecentMatchStats({ platform, playerName });
+  if (recentMatches && 'statusCode' in recentMatches) {
+    return <ErrorState error={recentMatches.message} />;
   }
 
   if (!recentMatches || recentMatches.length === 0) {
