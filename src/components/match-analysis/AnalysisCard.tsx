@@ -25,7 +25,7 @@ export default function AnalysisCard({
         <button
           onClick={onClick}
           disabled={isLoading}
-          className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50"
+          className="w-full p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50 hover:cursor-pointer"
         >
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">

@@ -66,7 +66,7 @@ export default function MatchCard({
       <div className="mt-4 pt-3 border-t border-gray-200 dark:border-gray-600">
         <button
           onClick={handleAnalyze}
-          className="w-full bg-blue-500 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 shadow-sm hover:shadow-md"
+          className="w-full bg-blue-500 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 shadow-sm hover:shadow-md hover:cursor-pointer"
         >
           📊 매치 분석
         </button>
