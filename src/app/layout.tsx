@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { Metadata } from 'next';
 import Script from 'next/script';
@@ -131,6 +132,7 @@ export default function RootLayout({
         <Providers>
           <ThemeToggle />
           {children}
+          <Analytics />
         </Providers>
         <Script
           id="structured-data"
