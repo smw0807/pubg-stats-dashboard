@@ -5,6 +5,7 @@ export interface TierInfo {
 
 export interface GameModeStats {
   assists: number;
+  avgKill: number;
   avgRank: number;
   avgSurvivalTime: number;
   bestRankPoint: number;

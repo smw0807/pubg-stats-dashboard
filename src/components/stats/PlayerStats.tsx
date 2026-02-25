@@ -2,12 +2,8 @@ import Link from 'next/link';
 import GameModeStats from './GameModeStats';
 import StatCard from './card/StatCard';
 import ErrorCard from './card/ErrorCard';
-import {
-  formatNumber,
-  formatPercentage,
-  getTierColor,
-} from '~/utils/matchUtils';
-import { fetchPlayerRankStats } from './hooks/usePlayerStats';
+import {formatNumber, formatPercentage, getTierColor} from '~/utils/matchUtils';
+import {fetchPlayerRankStats} from './hooks/usePlayerStats';
 
 interface PlayerStatsProps {
   playerName: string;
@@ -61,7 +57,7 @@ export default async function PlayerStats({
   playerName,
   platform,
 }: PlayerStatsProps) {
-  const rankStats = await fetchPlayerRankStats({ platform, playerName });
+  const rankStats = await fetchPlayerRankStats({platform, playerName});
 
   if (rankStats && 'statusCode' in rankStats) {
     return (
