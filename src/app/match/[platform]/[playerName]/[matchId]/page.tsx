@@ -12,6 +12,7 @@ import SurvivalLeaderboardCard from '~/components/match-analysis/SurvivalLeaderb
 import TeamAnalysisCard from '~/components/match-analysis/TeamAnalysisCard';
 import MatchStatisticsCard from '~/components/match-analysis/MatchStatisticsCard';
 import PlayerPerformanceCard from '~/components/match-analysis/PlayerPerformanceCard';
+import TelemetrySection from '~/components/match-analysis/telemetry/TelemetrySection';
 
 const CARD_LIST = [
   {
@@ -238,6 +239,13 @@ export default function MatchAnalysisPage() {
             </div>
           )}
         </div>
+
+        {/* 원격 분석 섹션 */}
+        <TelemetrySection
+          platform={platform}
+          matchId={matchId}
+          playerName={playerName}
+        />
       </div>
     </div>
   );
