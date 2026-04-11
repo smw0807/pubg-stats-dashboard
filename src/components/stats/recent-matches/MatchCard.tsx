@@ -23,7 +23,9 @@ export default function MatchCard({
   const router = useRouter();
 
   const handleAnalyze = () => {
-    router.push(`/match/${platform}/${playerName}/${match.matchId}`);
+    router.push(
+      `/match/${platform}/${playerName}/${match.matchId}?mapName=${encodeURIComponent(match.mapName)}`
+    );
   };
 
   return (

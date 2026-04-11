@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useMatchSummary } from '~/components/match-analysis/hooks/useMatchSummary';
 import AnalysisCard from '~/components/match-analysis/AnalysisCard';
 import MatchSummaryCard from '~/components/match-analysis/MatchSummaryCard';
 import TeamRankCard from '~/components/match-analysis/TeamRankCard';
@@ -74,11 +75,17 @@ const CARD_LIST = [
 export default function MatchAnalysisPage() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const platform = params.platform as string;
   const matchId = params.matchId as string;
   const playerName = params.playerName as string;
+
+  // mapName: URL 파라미터 우선, 없으면 summary API에서 가져옴
+  const mapNameFromUrl = searchParams.get('mapName') ?? '';
+  const { data: summaryData } = useMatchSummary(platform, matchId);
+  const mapName = mapNameFromUrl || (summaryData as { mapName?: string })?.mapName || '';
 
   const handleBack = () => {
     router.back();
@@ -245,6 +252,7 @@ export default function MatchAnalysisPage() {
           platform={platform}
           matchId={matchId}
           playerName={playerName}
+          mapName={mapName}
         />
       </div>
     </div>

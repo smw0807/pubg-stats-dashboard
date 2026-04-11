@@ -5,18 +5,26 @@ import MovementLogCard from './MovementLogCard';
 import KillLogCard from './KillLogCard';
 import GroggyLogCard from './GroggyLogCard';
 import DamageLogCard from './DamageLogCard';
+import TelemetryMapView from './TelemetryMapView';
 
 interface Props {
   platform: string;
   matchId: string;
   playerName: string;
+  mapName: string;
 }
 
 const TELEMETRY_CARDS = [
   {
+    key: 'map',
+    title: '지도 보기',
+    icon: '🗺️',
+    description: '지도 위에 이동경로·킬·기절·데미지 표시',
+  },
+  {
     key: 'movement',
     title: '이동 경로',
-    icon: '🗺️',
+    icon: '👣',
     description: '플레이어의 위치 이동 기록',
   },
   {
@@ -43,12 +51,22 @@ export default function TelemetrySection({
   platform,
   matchId,
   playerName,
+  mapName,
 }: Props) {
   const [selectedTab, setSelectedTab] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const renderContent = () => {
     switch (selectedTab) {
+      case 'map':
+        return (
+          <TelemetryMapView
+            platform={platform}
+            matchId={matchId}
+            playerName={playerName}
+            mapName={mapName}
+          />
+        );
       case 'movement':
         return (
           <MovementLogCard
@@ -106,15 +124,13 @@ export default function TelemetrySection({
       </div>
 
       {/* 탭 카드 그리드 */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
         {TELEMETRY_CARDS.map((card) => {
           const isActive = selectedTab === card.key;
           return (
             <button
               key={card.key}
-              onClick={() =>
-                setSelectedTab(isActive ? null : card.key)
-              }
+              onClick={() => setSelectedTab(isActive ? null : card.key)}
               disabled={isLoading && !isActive}
               className={`rounded-lg p-4 text-left transition-all duration-200 border-2 ${
                 isActive
