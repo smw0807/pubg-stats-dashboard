@@ -4,19 +4,19 @@ PUBG (PlayerUnknown's Battlegrounds) 경기 통계를 시각화하는 대시보�
 
 ## 🎯 프로젝트 개요
 
-이 프로젝트는 PUBG 매치 데이터를 분석하고 다양한 통계 정보를 직관적으로 시각화하는 웹 애플리케이션입니다. 플레이어 검색, 매치 분석, 팀 성과 분석 등 다양한 기능을 제공합니다.
+이 프로젝트는 PUBG 매치 데이터를 분석하고 다양한 통계 정보를 직관적으로 시각화하는 웹 애플리케이션입니다.
+플레이어 검색, 매치 분석, 팀 성과 분석, 원격 분석(Telemetry) 등 다양한 기능을 제공합니다.
 
 ## 배포 주소
 
-https://pubg-stats-dashboard.vercel.app/  
-<s>현재 무료 PUBG API 키를 사용하고 있어서 1분에 10회 요청 제한이 있습니다.</s>  
+https://pubg-stats-dashboard.vercel.app/
 현재 펍지로부터 API 요청 수 제한을 풀어줘서 여유롭게 사용 가능합니다.
 
 ## ✨ 주요 기능
 
 ### 🔍 플레이어 검색
 
-- 플레이어 이름으로 검색  
+- 플레이어 이름으로 검색
    **!** 현재 일반 스탯정보가 모두 0으로 넘어오고 있어서 랭크 스탯만 제공됩니다.
 - 최근 매치 기록 조회
 - 매치 분석
@@ -33,11 +33,25 @@ https://pubg-stats-dashboard.vercel.app/
 - **플레이어 성과 분석**: 플레이어별 성과 분석
 - **매치 통계**: 매치 전체 통계 요약
 
+### 📡 원격 분석 (Telemetry)
+
+매치 내 상세 이벤트 데이터를 지도 및 목록으로 확인할 수 있습니다.
+
+- **지도 보기**: 이동경로·킬·기절·데미지를 PUBG 맵 위에 레이어로 시각화
+  - 레이어 개별 토글 (이동경로 / 킬 / 기절 / 데미지)
+  - 마우스 휠 줌 및 드래그 패닝
+  - 마커 hover 시 상세 정보 툴팁 표시
+- **이동 경로**: 플레이어의 위치 이동 기록 (목록 / 지도 탭)
+- **킬 로그**: 매치에서 발생한 킬 이벤트 (목록 / 지도 탭)
+- **기절(DBNO) 로그**: 매치에서 발생한 기절 이벤트 (목록 / 지도 탭)
+- **데미지 로그**: 매치에서 발생한 데미지 이벤트 (목록 / 지도 탭)
+
 ### 📈 데이터 시각화
 
 - 직관적인 카드 기반 UI
 - 색상 코딩을 통한 데이터 구분
 - 반응형 디자인
+- 다크 모드 지원
 - 실시간 로딩 상태 표시
 
 ## 🛠 개발 환경
@@ -48,10 +62,9 @@ https://pubg-stats-dashboard.vercel.app/
 
 ## 🛠 기술 스택
 
-- **Frontend**: Next.js 14, React 18, TypeScript
+- **Frontend**: Next.js 15, React 19, TypeScript 5
 - **Styling**: Tailwind CSS
-- **State Management**: React Query (TanStack Query)
-- **Build Tool**: Vite
+- **State Management**: TanStack Query (React Query)
 - **Package Manager**: Yarn
 
 ## 📁 프로젝트 구조
@@ -59,20 +72,29 @@ https://pubg-stats-dashboard.vercel.app/
 ```
 pubg-stats-dashboard/
 ├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── layout.tsx         # 루트 레이아웃
-│   │   ├── page.tsx           # 메인 페이지
-│   │   ├── player/            # 플레이어 관련 페이지
-│   │   └── match/             # 매치 분석 페이지
-│   ├── components/            # React 컴포넌트
-│   │   ├── PlayerSearch.tsx   # 플레이어 검색
-│   │   ├── stats/             # 통계 관련 컴포넌트
-│   │   └── match-analysis/    # 매치 분석 컴포넌트
-│   ├── hooks/                 # 커스텀 훅
-│   ├── models/                # TypeScript 타입 정의
-│   ├── store/                 # 상태 관리
-│   └── utils/                 # 유틸리티 함수
-├── public/                    # 정적 파일
+│   ├── app/                          # Next.js App Router
+│   │   ├── layout.tsx                # 루트 레이아웃
+│   │   ├── page.tsx                  # 메인 페이지
+│   │   ├── player/                   # 플레이어 관련 페이지
+│   │   └── match/                    # 매치 분석 페이지
+│   ├── components/                   # React 컴포넌트
+│   │   ├── PlayerSearch.tsx          # 플레이어 검색
+│   │   ├── stats/                    # 통계 관련 컴포넌트
+│   │   └── match-analysis/           # 매치 분석 컴포넌트
+│   │       └── telemetry/            # 원격 분석 컴포넌트
+│   │           ├── TelemetrySection.tsx
+│   │           ├── TelemetryMapView.tsx  # 통합 지도 뷰
+│   │           ├── LogMapCanvas.tsx      # 공유 지도 캔버스
+│   │           ├── MovementLogCard.tsx
+│   │           ├── KillLogCard.tsx
+│   │           ├── GroggyLogCard.tsx
+│   │           └── DamageLogCard.tsx
+│   ├── models/                       # TypeScript 타입 정의
+│   ├── store/                        # 상태 관리 (Zustand)
+│   └── utils/                        # 유틸리티 함수
+├── public/
+│   ├── maps/                         # PUBG 맵 이미지
+│   └── img/                          # 스크린샷
 └── package.json
 ```
 
@@ -83,7 +105,7 @@ pubg-stats-dashboard/
 1. **저장소 클론**
 
    ```bash
-   git clone https://github.com/your-username/pubg-stats-dashboard.git
+   git clone https://github.com/smw0807/pubg-stats-dashboard.git
    cd pubg-stats-dashboard
    ```
 
@@ -93,13 +115,21 @@ pubg-stats-dashboard/
    yarn install
    ```
 
-3. **개발 서버 실행**
+3. **환경 변수 설정**
+
+   `.env.local` 파일을 생성하고 PUBG API 키를 설정합니다.
+
+   ```
+   PUBG_API_KEY=your_api_key_here
+   ```
+
+4. **개발 서버 실행**
 
    ```bash
    yarn dev
    ```
 
-4. **브라우저에서 확인**
+5. **브라우저에서 확인**
    ```
    http://localhost:3000
    ```
@@ -113,8 +143,6 @@ yarn build
 # 프로덕션 서버 실행
 yarn start
 ```
-
-**Note**: 이 프로젝트는 PUBG API를 사용하여 실제 게임 데이터를 표시합니다. API 키 설정이 필요합니다.
 
 # 구현 화면
 
@@ -142,7 +170,7 @@ yarn start
 
 ### 팀 순위
 
-해당 매치에 대한 팀 순위 정보를 볼 수 있다.  
+해당 매치에 대한 팀 순위 정보를 볼 수 있다.
 팀 순위별로 노출되며 간략한 정보를 표기한다.
 
 <img src="img/6.png"/>
@@ -175,7 +203,7 @@ yarn start
 
 ### 플레이어 성과 분석
 
-해당 매치에서 플레이어들의 성과 정보를 보여준다.  
+해당 매치에서 플레이어들의 성과 정보를 보여준다.
 또한 성과 통계에 대한 요약 정보를 제공한다.
 <img src="img/12.png"/>
 <img src="img/13.png"/>
@@ -184,3 +212,18 @@ yarn start
 
 해당 매치에 대한 전체적인 데이터를 보여준다.
 <img src="img/14.png"/>
+
+## 원격 분석 (Telemetry)
+
+매치 내 상세 이벤트 데이터를 지도와 목록으로 확인할 수 있다.
+
+### 지도 보기
+
+PUBG 맵 위에 이동경로·킬·기절·데미지를 레이어로 표시한다.
+각 레이어는 개별 토글이 가능하며, 마우스 휠로 확대/축소, 드래그로 이동할 수 있다.
+마커에 마우스를 올리면 해당 이벤트의 상세 정보가 툴팁으로 표시된다.
+
+### 이동 경로 / 킬 로그 / 기절 로그 / 데미지 로그
+
+각 로그는 목록 탭과 지도 탭을 통해 확인할 수 있다.
+지도 탭에서는 해당 이벤트의 발생 위치를 맵 위에 시각화하며, 마커 hover 시 상세 정보를 표시한다.

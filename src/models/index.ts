@@ -29,6 +29,18 @@ export type {
   PlayerItems,
 } from './playerPerformance';
 
+// Telemetry
+export type {
+  MovementLogEntry,
+  MovementLogData,
+  KillLogEntry,
+  KillLogData,
+  GroggyLogEntry,
+  GroggyLogData,
+  DamageLogEntry,
+  DamageLogData,
+} from './telemetry';
+
 export interface ErrorResponse {
   statusCode: number;
   message: string;
