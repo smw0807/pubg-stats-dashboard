@@ -73,6 +73,7 @@ export default function TelemetrySection({
             platform={platform}
             matchId={matchId}
             playerName={playerName}
+            mapName={mapName}
             setIsLoading={setIsLoading}
           />
         );
@@ -82,6 +83,7 @@ export default function TelemetrySection({
             platform={platform}
             matchId={matchId}
             playerName={playerName}
+            mapName={mapName}
             setIsLoading={setIsLoading}
           />
         );
@@ -91,6 +93,7 @@ export default function TelemetrySection({
             platform={platform}
             matchId={matchId}
             playerName={playerName}
+            mapName={mapName}
             setIsLoading={setIsLoading}
           />
         );
@@ -100,6 +103,7 @@ export default function TelemetrySection({
             platform={platform}
             matchId={matchId}
             playerName={playerName}
+            mapName={mapName}
             setIsLoading={setIsLoading}
           />
         );
