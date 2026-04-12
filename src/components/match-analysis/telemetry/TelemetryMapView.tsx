@@ -5,7 +5,9 @@ import { useTelemetryMovement } from '../hooks/useTelemetryMovement';
 import { useTelemetryKills } from '../hooks/useTelemetryKills';
 import { useTelemetryGroggy } from '../hooks/useTelemetryGroggy';
 import { useTelemetryDamage } from '../hooks/useTelemetryDamage';
-import type { KillLogEntry, GroggyLogEntry, DamageLogEntry, MovementLogEntry } from '~/models/telemetry';
+import type { MovementLogEntry } from '~/models/telemetry';
+import { TooltipBox } from './MapTooltip';
+import type { TooltipInfo } from './MapTooltip';
 
 interface Props {
   platform: string;
@@ -45,83 +47,6 @@ interface Layers {
   damage: boolean;
 }
 
-type TooltipData =
-  | { type: 'kill'; data: KillLogEntry }
-  | { type: 'groggy'; data: GroggyLogEntry }
-  | { type: 'damage'; data: DamageLogEntry }
-  | { type: 'movement'; data: MovementLogEntry };
-
-interface TooltipInfo {
-  x: number;
-  y: number;
-  info: TooltipData;
-}
-
-function formatElapsed(seconds: number) {
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return m > 0 ? `${m}분 ${s}초` : `${s}초`;
-}
-
-function TooltipBox({ tooltip, canvasWidth }: { tooltip: TooltipInfo; canvasWidth: number }) {
-  const { x, y, info } = tooltip;
-  const flipX = x > canvasWidth * 0.65;
-
-  let header = '';
-  let rows: string[] = [];
-
-  if (info.type === 'kill') {
-    header = '💀 킬';
-    rows = [
-      `킬러: ${info.data.killer.name}`,
-      `피해자: ${info.data.victim.name}`,
-      `무기: ${info.data.weapon}`,
-      `거리: ${Math.round(info.data.distance)}m`,
-      ...(info.data.isSuicide ? ['(자살)'] : []),
-      ...(info.data.assists?.length ? [`어시스트: ${info.data.assists.join(', ')}`] : []),
-    ];
-  } else if (info.type === 'groggy') {
-    header = '👊 기절(DBNO)';
-    rows = [
-      `공격자: ${info.data.attacker?.name ?? '알 수 없음'}`,
-      `피해자: ${info.data.victim.name}`,
-      `무기: ${info.data.weapon}`,
-      `거리: ${Math.round(info.data.distance)}m`,
-    ];
-  } else if (info.type === 'damage') {
-    header = '💥 데미지';
-    rows = [
-      `공격자: ${info.data.attacker?.name ?? '환경/블루존'}`,
-      `피해자: ${info.data.victim.name}`,
-      `데미지: ${Math.round(info.data.damage)}`,
-      `무기: ${info.data.weapon}`,
-    ];
-  } else {
-    header = '👣 이동';
-    rows = [
-      `체력: ${Math.round(info.data.health)}%`,
-      `경과: ${formatElapsed(info.data.elapsedTime)}`,
-      `생존자: ${info.data.numAlivePlayers}명`,
-    ];
-  }
-
-  return (
-    <div
-      className="absolute z-20 pointer-events-none bg-gray-900/95 text-white text-xs rounded-lg px-3 py-2 shadow-xl border border-gray-600 space-y-0.5"
-      style={{
-        left: flipX ? x - 14 : x + 14,
-        top: Math.max(4, y - 10),
-        transform: flipX ? 'translateX(-100%)' : undefined,
-        whiteSpace: 'nowrap',
-      }}
-    >
-      <div className="font-bold text-sm mb-1">{header}</div>
-      {rows.map((r, i) => (
-        <div key={i} className="text-gray-200">{r}</div>
-      ))}
-    </div>
-  );
-}
 
 export default function TelemetryMapView({
   platform,
@@ -251,7 +176,7 @@ export default function TelemetryMapView({
         const isMe = e.attacker?.name === playerName;
         ctx.beginPath();
         ctx.fillStyle = isMe ? 'rgba(251,191,36,0.9)' : 'rgba(251,191,36,0.35)';
-        ctx.arc(cx, cy, isMe ? 3 : 2, 0, Math.PI * 2);
+        ctx.arc(cx, cy, (isMe ? 3 : 2) / zoom, 0, Math.PI * 2);
         ctx.fill();
       });
     }
@@ -263,7 +188,7 @@ export default function TelemetryMapView({
         const { cx: vx, cy: vy } = toC(e.victim.location.x, e.victim.location.y);
         const isMyKnock = e.attacker?.name === playerName;
         const isMyDown = e.victim.name === playerName;
-        const sz = isMyKnock || isMyDown ? 7 : 5;
+        const sz = (isMyKnock || isMyDown ? 7 : 5) / zoom;
         const color = isMyDown ? '#f97316' : isMyKnock ? '#60a5fa' : '#fbbf24';
 
         ctx.beginPath();
@@ -302,12 +227,12 @@ export default function TelemetryMapView({
         ctx.fillStyle = isMyKill ? '#3b82f6' : isMyDeath ? '#f97316' : '#ef4444';
         ctx.strokeStyle = 'rgba(0,0,0,0.5)';
         ctx.lineWidth = 1 / zoom;
-        ctx.arc(kx, ky, isMyKill || isMyDeath ? 5 : 3, 0, Math.PI * 2);
+        ctx.arc(kx, ky, (isMyKill || isMyDeath ? 5 : 3) / zoom, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
 
         // 피해자 X
-        const xs = isMyKill || isMyDeath ? 5 : 3;
+        const xs = (isMyKill || isMyDeath ? 5 : 3) / zoom;
         ctx.strokeStyle = isMyDeath ? '#f97316' : isMyKill ? '#60a5fa' : '#ef4444';
         ctx.lineWidth = (isMyKill || isMyDeath ? 2.5 : 1.5) / zoom;
         ctx.beginPath();
@@ -340,11 +265,11 @@ export default function TelemetryMapView({
       ctx.fillStyle = '#22c55e';
       ctx.strokeStyle = 'white';
       ctx.lineWidth = 2 / zoom;
-      ctx.arc(sx, sy, 7, 0, Math.PI * 2);
+      ctx.arc(sx, sy, 7 / zoom, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = 'white';
-      ctx.font = `bold ${Math.max(7, 9 / zoom)}px sans-serif`;
+      ctx.font = `bold ${9 / zoom}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('S', sx, sy);
@@ -356,11 +281,11 @@ export default function TelemetryMapView({
       ctx.fillStyle = '#ef4444';
       ctx.strokeStyle = 'white';
       ctx.lineWidth = 2 / zoom;
-      ctx.arc(ex, ey, 7, 0, Math.PI * 2);
+      ctx.arc(ex, ey, 7 / zoom, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
       ctx.fillStyle = 'white';
-      ctx.font = `bold ${Math.max(7, 9 / zoom)}px sans-serif`;
+      ctx.font = `bold ${9 / zoom}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('E', ex, ey);
