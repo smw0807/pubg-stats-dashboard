@@ -174,12 +174,6 @@ export default function TelemetryMapView({
 
   const isLoading = movLoading || killLoading || groggyLoading || dmgLoading;
 
-  // 오프셋 범위 제한 (맵이 항상 캔버스를 채우도록)
-  const clamp = useCallback((ox: number, oy: number, z: number) => ({
-    x: Math.min(0, Math.max(CANVAS_SIZE * (1 - z), ox)),
-    y: Math.min(0, Math.max(CANVAS_SIZE * (1 - z), oy)),
-  }), []);
-
   const applyZoom = useCallback(
     (newZoom: number, newOffset: { x: number; y: number }) => {
       zoomRef.current = newZoom;
@@ -394,7 +388,6 @@ export default function TelemetryMapView({
     isDragging.current = true;
     setDragging(true);
     lastPos.current = getPos(e.clientX, e.clientY);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -483,7 +476,6 @@ export default function TelemetryMapView({
     }
 
     setTooltip(found);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [layers, killData, groggyData, damageData, movementData, mapSize, applyZoom]);
 
   const handleMouseUp = useCallback(() => {

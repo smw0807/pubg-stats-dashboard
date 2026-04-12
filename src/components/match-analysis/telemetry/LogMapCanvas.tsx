@@ -363,7 +363,6 @@ export default function LogMapCanvas({
     isDragging.current = true;
     setDragging(true);
     lastPos.current = getPos(e.clientX, e.clientY);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleMouseMove = useCallback(
@@ -453,7 +452,6 @@ export default function LogMapCanvas({
 
       setTooltip(found);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [killData, groggyData, damageData, movementData, mapSize, applyZoom]
   );
 
