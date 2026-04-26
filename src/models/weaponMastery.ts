@@ -14,13 +14,7 @@ export interface WeaponSummary {
 }
 
 export interface WeaponMasterySummaryResponse {
-  data: {
-    type: "weaponMasterySummary";
-    id: string;
-    attributes: {
-      weaponSummaries: Record<string, WeaponSummary>;
-    };
-  };
+  weaponSummaries: Record<string, WeaponSummary>;
 }
 
 export type WeaponCategory =

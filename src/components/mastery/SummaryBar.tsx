@@ -17,7 +17,10 @@ export default function SummaryBar({ weapons }: SummaryBarProps) {
     (sum, [, weapon]) => sum + weapon.StatsTotal.HeadShots,
     0
   );
-  const maxLevel = Math.max(...weapons.map(([, weapon]) => weapon.LevelCurrent));
+  const maxLevel =
+    weapons.length > 0
+      ? Math.max(...weapons.map(([, weapon]) => weapon.LevelCurrent))
+      : 0;
   const masteredCount = weapons.filter(
     ([, weapon]) => weapon.TierCurrent > 0
   ).length;
