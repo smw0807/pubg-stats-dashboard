@@ -140,6 +140,18 @@ export const WEAPON_CATEGORIES: Record<WeaponCategory, string[]> = {
   ],
 };
 
+export const WEAPON_CATEGORY_LABELS: Record<WeaponCategory | "ALL", string> = {
+  ALL: "전체",
+  AR: "돌격소총",
+  DMR: "지정사수",
+  SR: "저격소총",
+  SMG: "기관단총",
+  LMG: "경기관총",
+  SG: "산탄총",
+  PISTOL: "권총",
+  SPECIAL: "특수",
+};
+
 export const TIER_INFO: Record<number, WeaponTierInfo> = {
   0: {
     label: "없음",
@@ -184,3 +196,23 @@ export const TIER_INFO: Record<number, WeaponTierInfo> = {
     border: "border-purple-500",
   },
 };
+
+export const TIER_BAR_COLORS = [
+  "bg-gray-400",
+  "bg-amber-500",
+  "bg-slate-400",
+  "bg-yellow-400",
+  "bg-cyan-400",
+  "bg-blue-500",
+  "bg-purple-500",
+];
+
+export const TIER_DOT_COLORS = [
+  "",
+  "#b45309",
+  "#94a3b8",
+  "#eab308",
+  "#22d3ee",
+  "#3b82f6",
+  "#a855f7",
+];
