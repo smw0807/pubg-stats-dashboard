@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import type { WeaponSummary } from "~/models/weaponMastery";
 import {
-  DUMMY_MASTERY_DATA,
   WEAPON_NAMES,
   WEAPON_CATEGORIES,
   TIER_INFO,
-  WeaponSummary,
-} from "./dummyData";
+} from "~/utils/weaponMasteryUtils";
+import { DUMMY_MASTERY_DATA } from "./dummyData";
 
 // 최대 레벨 (100레벨 기준)
 const MAX_LEVEL = 100;
@@ -227,12 +227,7 @@ export default function MasteryPage() {
 
   const allWeapons = useMemo(
     () =>
-      Object.entries(
-        DUMMY_MASTERY_DATA.data.attributes.weaponSummaries as Record<
-          string,
-          WeaponSummary
-        >
-      ),
+      Object.entries(DUMMY_MASTERY_DATA.data.attributes.weaponSummaries),
     []
   );
 
