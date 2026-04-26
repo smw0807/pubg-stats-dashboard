@@ -99,11 +99,6 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#1e40af" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2744752399044248"
-          crossOrigin="anonymous"
-        ></script>
         <Script
           id="theme-init"
           strategy="beforeInteractive"
@@ -136,6 +131,13 @@ export default function RootLayout({
           {children}
           <Analytics />
         </Providers>
+        <Script
+          id="adsbygoogle"
+          strategy="afterInteractive"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2744752399044248"
+          crossOrigin="anonymous"
+        />
         <Script
           id="structured-data"
           type="application/ld+json"

@@ -11,6 +11,7 @@ export * from './killLeaderboard';
 export * from './damageLeaderboard';
 export * from './survivalLeaderboard';
 export * from './teamAnalysis';
+export * from './weaponMastery';
 
 // Match Statistics
 export type {

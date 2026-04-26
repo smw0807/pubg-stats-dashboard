@@ -26,7 +26,7 @@ export default function MatchHeader({
           {getGameModeDisplayName(gameMode)} - {getMapDisplayName(mapName)}
         </h3>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          {new Date(matchDate).toLocaleString()}
+          {new Date(matchDate).toLocaleString('ko-KR')}
         </p>
       </div>
       <div className="text-right">

@@ -44,11 +44,18 @@ function HeaderComponent({
         플랫폼: {platform === 'steam' ? '스팀' : '카카오'}
       </p>
 
-      <Link href="/">
-        <button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 shadow-lg">
-          새로운 검색
-        </button>
-      </Link>
+      <div className="flex justify-center gap-3">
+        <Link href={`/mastery/${platform}/${playerName}`}>
+          <button className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 shadow-lg">
+            마스터리 조회
+          </button>
+        </Link>
+        <Link href="/">
+          <button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-md transition duration-200 shadow-lg">
+            새로운 검색
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

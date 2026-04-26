@@ -6,8 +6,7 @@ export const fetchPlayerRankStats = async ({
   playerName,
 }: SearchParams): Promise<RankedGameModeStats | ErrorResponse> => {
   const res = await fetch(
-    `${
-      process.env.API_URL
+    `${process.env.API_URL
     }/stats/rank?platform=${platform}&playerName=${encodeURIComponent(
       playerName
     )}`
@@ -21,8 +20,7 @@ export const fetchPlayerStats = async ({
   playerName,
 }: SearchParams): Promise<RankedGameModeStats> => {
   const res = await fetch(
-    `${
-      process.env.API_URL
+    `${process.env.API_URL
     }/stats/normal?platform=${platform}&playerName=${encodeURIComponent(
       playerName
     )}`
