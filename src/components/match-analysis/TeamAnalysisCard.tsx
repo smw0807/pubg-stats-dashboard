@@ -7,7 +7,7 @@ import {
   formatDistance,
   formatTime,
 } from '~/utils/matchUtils';
-import { useTeamAnalysis } from './hooks/useTeamAnalysis';
+import { useTeamAnalysis } from '~/features/match-analysis/queries';
 import PlayerNameClick from './PlayerNameClick';
 
 export default function TeamAnalysisCard({

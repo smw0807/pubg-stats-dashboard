@@ -4,7 +4,7 @@ import { MatchStatistics } from '~/models/matchStatistics';
 import { getGameModeDisplayName, getMapDisplayName } from '~/utils/matchUtils';
 import { formatDuration } from '~/utils/dateUtils';
 import { formatDistance, formatTime } from '~/utils/matchUtils';
-import { useMatchStatistics } from './hooks/useMatchStatistics';
+import { useMatchStatistics } from '~/features/match-analysis/queries';
 
 export default function MatchStatisticsCard({
   platform,

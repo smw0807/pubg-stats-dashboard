@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTelemetryDamage } from '../hooks/useTelemetryDamage';
+import { useTelemetryDamage } from '~/features/match-analysis/queries';
 import { DamageLogData } from '~/models/telemetry';
 import LogMapCanvas from './LogMapCanvas';
 

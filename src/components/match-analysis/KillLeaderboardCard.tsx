@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { KillLeaderboardData } from '~/models/killLeaderboard';
 import { getRankColor, getRankIcon } from '~/utils/matchUtils';
-import { useKills } from './hooks/useKills';
+import { useKills } from '~/features/match-analysis/queries';
 import PlayerNameClick from './PlayerNameClick';
 
 export default function KillLeaderboardCard({

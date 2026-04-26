@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTelemetryKills } from '../hooks/useTelemetryKills';
+import { useTelemetryKills } from '~/features/match-analysis/queries';
 import { KillLogData } from '~/models/telemetry';
 import LogMapCanvas from './LogMapCanvas';
 

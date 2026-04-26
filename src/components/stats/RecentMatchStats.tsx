@@ -1,4 +1,4 @@
-import { fetchRecentMatchStats } from './hooks/useRecentMatchStats';
+import { fetchRecentMatchStats } from '~/features/player/api';
 import ErrorState from './recent-matches/ErrorState';
 import EmptyState from './recent-matches/EmptyState';
 import MatchCard from './recent-matches/MatchCard';

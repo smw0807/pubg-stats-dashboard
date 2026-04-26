@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTelemetryMovement } from '../hooks/useTelemetryMovement';
+import { useTelemetryMovement } from '~/features/match-analysis/queries';
 import { MovementLogData } from '~/models/telemetry';
 import LogMapCanvas from './LogMapCanvas';
 
