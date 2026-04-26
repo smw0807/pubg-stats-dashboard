@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { Platform } from '../models/platform';
+import {useState} from 'react';
+import {Platform} from '../models/platform';
 import Alert from './Alert';
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
 
 export default function PlayerSearch() {
   const router = useRouter();
@@ -22,7 +22,7 @@ export default function PlayerSearch() {
 
   const showAlert = (
     message: string,
-    type: 'error' | 'warning' | 'success' | 'info' = 'info'
+    type: 'error' | 'warning' | 'success' | 'info' = 'info',
   ) => {
     setAlert({
       isOpen: true,
@@ -32,7 +32,7 @@ export default function PlayerSearch() {
   };
 
   const hideAlert = () => {
-    setAlert((prev) => ({ ...prev, isOpen: false }));
+    setAlert((prev) => ({...prev, isOpen: false}));
   };
 
   const handleSearch = () => {
@@ -74,16 +74,14 @@ export default function PlayerSearch() {
           <div>
             <label
               htmlFor="platform"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               플랫폼
             </label>
             <select
               id="platform"
               value={platform}
               onChange={(e) => setPlatform(e.target.value as Platform)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700"
-            >
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700">
               <option value="steam">스팀</option>
               <option value="kakao">카카오</option>
             </select>
@@ -92,8 +90,7 @@ export default function PlayerSearch() {
           <div>
             <label
               htmlFor="nickname"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               플레이어 닉네임
             </label>
             <input
@@ -109,8 +106,7 @@ export default function PlayerSearch() {
 
           <button
             onClick={handleSearch}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
             검색
           </button>
         </div>
