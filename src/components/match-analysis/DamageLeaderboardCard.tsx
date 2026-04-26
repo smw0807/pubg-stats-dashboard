@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { DamageLeaderboardData } from '~/models/damageLeaderboard';
 import { getRankColor, getRankIcon } from '~/utils/matchUtils';
-import { useDamage } from './hooks/useDamage';
+import { useDamage } from '~/features/match-analysis/queries';
 import PlayerNameClick from './PlayerNameClick';
 
 export default function DamageLeaderboardCard({

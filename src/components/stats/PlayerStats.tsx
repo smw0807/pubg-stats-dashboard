@@ -3,7 +3,7 @@ import GameModeStats from './GameModeStats';
 import StatCard from './card/StatCard';
 import ErrorCard from './card/ErrorCard';
 import {formatNumber, formatPercentage, getTierColor} from '~/utils/matchUtils';
-import {fetchPlayerRankStats} from './hooks/usePlayerStats';
+import {fetchPlayerRankStats} from '~/features/player/api';
 
 interface PlayerStatsProps {
   playerName: string;

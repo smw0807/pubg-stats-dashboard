@@ -8,7 +8,7 @@ import SummaryBar from './SummaryBar';
 import TierLegend from './TierLegend';
 import type {WeaponCategoryFilter, WeaponMasterySortKey} from './types';
 import WeaponCard from './WeaponCard';
-import {useWeaponMastery} from './hooks/useWeaponMastery';
+import {useWeaponMastery} from '~/features/mastery/queries';
 
 interface MasteryPageClientProps {
   platform: string;

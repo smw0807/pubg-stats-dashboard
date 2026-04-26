@@ -4,7 +4,7 @@ import { formatDuration, formatDate } from '~/utils/dateUtils';
 import AnalysisCard from './AnalysisCard';
 import { formatNumber } from '~/utils/matchUtils';
 import { MatchSummary } from '~/models/summary';
-import { useMatchSummary } from './hooks/useMatchSummary';
+import { useMatchSummary } from '~/features/match-analysis/queries';
 
 export default function MatchSummaryCard({
   platform,

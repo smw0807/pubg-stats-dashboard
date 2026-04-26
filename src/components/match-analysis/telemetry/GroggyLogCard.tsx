@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTelemetryGroggy } from '../hooks/useTelemetryGroggy';
+import { useTelemetryGroggy } from '~/features/match-analysis/queries';
 import { GroggyLogData } from '~/models/telemetry';
 import LogMapCanvas from './LogMapCanvas';
 

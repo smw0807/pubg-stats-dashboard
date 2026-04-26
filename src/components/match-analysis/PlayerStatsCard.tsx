@@ -7,7 +7,7 @@ import {
   formatDistance,
   formatTime,
 } from '~/utils/matchUtils';
-import { usePlayerStats } from './hooks/usePlayerStats';
+import { usePlayerStats } from '~/features/match-analysis/queries';
 import PlayerNameClick from './PlayerNameClick';
 
 export default function PlayerStatsCard({

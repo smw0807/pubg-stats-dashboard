@@ -1,21 +1,4 @@
-import type {
-  KillLogEntry,
-  GroggyLogEntry,
-  DamageLogEntry,
-  MovementLogEntry,
-} from '~/models/telemetry';
-
-export type TooltipData =
-  | {type: 'kill'; data: KillLogEntry}
-  | {type: 'groggy'; data: GroggyLogEntry}
-  | {type: 'damage'; data: DamageLogEntry}
-  | {type: 'movement'; data: MovementLogEntry};
-
-export interface TooltipInfo {
-  x: number;
-  y: number;
-  info: TooltipData;
-}
+import type { TooltipInfo } from '~/features/match-analysis/telemetry/types';
 
 export function formatElapsed(seconds: number) {
   const m = Math.floor(seconds / 60);

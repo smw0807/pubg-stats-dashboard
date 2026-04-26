@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { TeamRankData } from '~/models/teamRank';
 import { formatDistance, formatTime } from '~/utils/matchUtils';
-import { useTeamRank } from './hooks/useTeamRank';
+import { useTeamRank } from '~/features/match-analysis/queries';
 import PlayerNameClick from './PlayerNameClick';
 
 export default function TeamRankCard({

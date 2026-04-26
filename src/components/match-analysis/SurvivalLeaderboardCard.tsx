@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { SurvivalLeaderboardData } from '~/models/survivalLeaderboard';
 import { getRankColor, getRankIcon, formatTime } from '~/utils/matchUtils';
-import { useSurvival } from './hooks/useSurvival';
+import { useSurvival } from '~/features/match-analysis/queries';
 import PlayerNameClick from './PlayerNameClick';
 
 export default function SurvivalLeaderboardCard({

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import AnalysisCard from './AnalysisCard';
 import { PlayerPerformanceAnalysis } from '~/models/playerPerformance';
 import { formatDuration } from '~/utils/dateUtils';
-import { usePlayerPerformance } from './hooks/usePlayerPerformance';
+import { usePlayerPerformance } from '~/features/match-analysis/queries';
 import PlayerNameClick from './PlayerNameClick';
 
 export default function PlayerPerformanceCard({
